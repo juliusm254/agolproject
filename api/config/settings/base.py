@@ -4,6 +4,7 @@ Base settings to build other settings files upon.
 import environ
 from pathlib import Path
 from corsheaders.defaults import default_headers
+from datetime import timedelta
 
 
 ROOT_DIR = Path(__file__).resolve(strict=True).parent.parent.parent
@@ -19,7 +20,8 @@ if READ_DOT_ENV_FILE:
 # GENERAL
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#debug
-DEBUG=env.bool("DJANGO_DEBUG", False)
+DEBUG=True
+# DEBUG=env.bool("DJANGO_DEBUG", True)
 # Local time zone. Choices are
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # though not all of them may be available with every OS.
@@ -53,10 +55,20 @@ ROOT_URLCONF = "config.urls"
 # https://docs.djangoproject.com/en/dev/ref/settings/#wsgi-application
 WSGI_APPLICATION = "config.wsgi.application"
 
+# CORS_ORIGIN_ALLOW_ALL = True
 
+
+ALLOWED_HOSTS = [
+   "0.0.0.0:8000"
+]
 
 CORS_ALLOWED_ORIGINS = [
+    "0.0.0.0:8000",
+    "172.18.0.2:8080",
+    "172.18.0.2",
     "https://agol-bvtwuypbsq-km.a.run.app",
+    "http://127.0.0.1",
+    "http://localhost",
     "http://127.0.0.1:8080",
     "http://localhost:8080"]
 
@@ -64,6 +76,8 @@ CORS_ALLOW_HEADERS = list(default_headers) + [
     'contenttype',
     'x-content-type-options'
 ]
+
+CSRF_TRUSTED_ORIGINS = ['127.0.0.1']
 
 # APPS
 # ------------------------------------------------------------------------------
@@ -301,3 +315,34 @@ SOCIALACCOUNT_FORMS = {"signup": "agol.users.forms.UserSocialSignupForm"}
 
 # Your stuff...
 # ------------------------------------------------------------------------------
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=30),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=30),
+    'ROTATE_REFRESH_TOKENS': False,
+    'BLACKLIST_AFTER_ROTATION': False,
+    'UPDATE_LAST_LOGIN': False,
+
+    'ALGORITHM': 'HS256',
+    'SIGNING_KEY': env("DJANGO_SECRET_KEY"),
+    'VERIFYING_KEY': None,
+    'AUDIENCE': None,
+    'ISSUER': None,
+    'JWK_URL': None,
+    'LEEWAY': 0,
+
+    'AUTH_HEADER_TYPES': ('Bearer',),
+    'AUTH_HEADER_NAME': 'HTTP_AUTHORIZATION',
+    'USER_ID_FIELD': 'id',
+    'USER_ID_CLAIM': 'user_id',
+    'USER_AUTHENTICATION_RULE': 'rest_framework_simplejwt.authentication.default_user_authentication_rule',
+
+    'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
+    'TOKEN_TYPE_CLAIM': 'token_type',
+    'TOKEN_USER_CLASS': 'rest_framework_simplejwt.models.TokenUser',
+
+    'JTI_CLAIM': 'jti',
+
+    'SLIDING_TOKEN_REFRESH_EXP_CLAIM': 'refresh_exp',
+    'SLIDING_TOKEN_LIFETIME': timedelta(minutes=5),
+    'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
+}

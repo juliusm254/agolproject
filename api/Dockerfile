@@ -36,6 +36,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
 # Requirements are installed here to ensure they will be cached.
 COPY ./requirements .
 
+RUN pip install --upgrade pip
 # Create Python Dependency and Sub-Dependency Wheels.
 RUN pip wheel --wheel-dir /usr/src/app/wheels  \
   -r ${BUILD_ENVIRONMENT}.txt
@@ -81,11 +82,11 @@ RUN pip install --no-cache-dir --no-index --find-links=/wheels/ /wheels/* \
   && rm -rf /wheels/
 
 
-COPY --chown=django:django ./entrypoint /entrypoint
-RUN sed -i 's/\r$//g' /entrypoint
-RUN chmod +x /entrypoint
+# COPY --chown=django:django ./entrypoint /entrypoint
+# RUN sed -i 's/\r$//g' /entrypoint
+# RUN chmod +x /entrypoint
 
-COPY --chown=django:django ./nginx.conf /etc/nginx/conf.d/configfile.template
+# COPY --chown=django:django ./nginx.conf /etc/nginx/conf.d/configfile.template
 
 # ADD nginx.conf /etc/nginx/nginx.conf
 # RUN sed -i 's/\r$//g' /etc/nginx/nginx.conf
@@ -93,9 +94,9 @@ COPY --chown=django:django ./nginx.conf /etc/nginx/conf.d/configfile.template
 # RUN chown django: /var/log/nginx/error.log
 
 
-COPY --chown=django:django ./start /start
-RUN sed -i 's/\r$//g' /start
-RUN chmod +x /start
+# COPY --chown=django:django ./start /start
+# RUN sed -i 's/\r$//g' /start
+# RUN chmod +x /start
 
 #my shit for start script
 
@@ -116,7 +117,16 @@ RUN chown django:django ${APP_HOME}
 
 USER django
 
-ENTRYPOINT ["/entrypoint"]
+
+# Run the web service on container startup. Here we use the gunicorn
+# webserver, with one worker process and 8 threads.
+# For environments with multiple CPU cores, increase the number of workers
+# to be equal to the cores available.
+# Timeout is set to 0 to disable the timeouts of the workers to allow Cloud Run to handle instance scaling.
+ENV PORT 8000
+# CMD exec gunicorn --bind 0.0.0.0:$PORT --workers 1 --threads 8 --timeout 0 config.wsgi --chdir=/app
+
+# ENTRYPOINT ["/entrypoint"]
 # ENV PORT 80
 
 # ENTRYPOINT ["/tini", "--"]
@@ -130,3 +140,8 @@ CMD ["./start" ]
 # COPY ./compose/production/traefik/traefik.yml /etc/traefik
 # CMD [ "start", "./start","envsubst '\$PORT' < /etc/nginx/conf.d/configfile.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"]
 # CMD ["entrypoint", "/start"]
+
+
+
+
+# /usr/local/bin/gunicorn config.wsgi 

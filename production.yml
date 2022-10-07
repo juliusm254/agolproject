@@ -17,10 +17,11 @@ services:
     #   # - redis
     env_file:
       - ./api/.envs/.production/.django
-    command: /start
-    environment:
-    #   # - API=http://agolapi:8080
-      - PORT=8080
+    # command: /start
+    # expose:
+    #   - "8000"
+    ports:
+      - "8000:8000"
 
   ops_front:
     container_name: ops_front
