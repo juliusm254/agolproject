@@ -59,13 +59,14 @@ WSGI_APPLICATION = "config.wsgi.application"
 
 
 ALLOWED_HOSTS = [
-   "0.0.0.0:8000"
+   "0.0.0.0:8000",
+   "127.0.0.1"
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    "0.0.0.0:8000",
-    "172.18.0.2:8080",
-    "172.18.0.2",
+    "http://0.0.0.0:8000",
+    "http://172.18.0.2:8080",
+    "http://172.18.0.2",
     "https://agol-bvtwuypbsq-km.a.run.app",
     "http://127.0.0.1",
     "http://localhost",
@@ -167,7 +168,8 @@ AUTH_PASSWORD_VALIDATORS = [
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware",    
+    "whitenoise.middleware.WhiteNoiseMiddleware", 
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.locale.LocaleMiddleware",
     "django.middleware.common.CommonMiddleware",

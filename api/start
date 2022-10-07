@@ -14,11 +14,11 @@ set -e
 
 # Apply database migrations
 echo "Creating Data"
-python /app/manage.py createdata &
+python ./manage.py createdata &
 
 # python manage.py migrate &
 # python /app/manage.py collectstatic --noinput &
-/usr/local/bin/gunicorn config.wsgi --bind 0.0.0.0:8000 --chdir=/app
+/usr/local/bin/gunicorn config.wsgi --bind 0.0.0.0:8000 --chdir=/app &
 wait -n
 
 #####################################################################################
