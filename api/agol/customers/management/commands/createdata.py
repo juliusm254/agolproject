@@ -72,8 +72,8 @@ class Command(BaseCommand):
             CustomerTruck.objects.create(registration=registration, customer=customer, truck=truck)
 
         for _ in range(200):
-            customer = Customer.objects.get(pk=random.randint(0, 100))
+            customer = Customer.objects.get(pk=random.randint(100, 200))
             name = fake.name()
-            driver = Driver.objects.get(pk=random.randint(0, 100))
+            driver = Driver.objects.get(pk=random.randint(100, 200))
             CustomerDriver.objects.create(customer=customer, name=name, driver=driver)
 
