@@ -59,21 +59,22 @@ class Command(BaseCommand):
         #     question_desc = fake.sentence()
         #     SafetyChecklistQuestion.objects.create(question_desc=question_desc)
 
-        for _ in range(200):
-            customer = Customer.objects.get(pk=random.randint(1, 100))
-            registration = fake.license_plate()
-            trailer = Vehicle.objects.get(pk=random.randint(1, 300))
-            CustomerTrailer.objects.create(registration=registration, customer=customer, trailer=trailer)
+        # for _ in range(200):
+        #     customer = Customer.objects.get(pk=random.randint(1, 100))
+        #     registration = fake.license_plate()
+        #     trailer = Vehicle.objects.get(pk=random.randint(1, 300))
+        #     CustomerTrailer.objects.create(registration=registration, customer=customer, trailer=trailer)
 
-        for _ in range(200):
-            customer = Customer.objects.get(pk=random.randint(1, 100))
-            registration = fake.license_plate()
-            truck = Vehicle.objects.get(pk=random.randint(1, 300))
-            CustomerTruck.objects.create(registration=registration, customer=customer, truck=truck)
+        # for _ in range(200):
+        #     customer = Customer.objects.get(pk=random.randint(1, 100))
+        #     registration = fake.license_plate()
+        #     truck = Vehicle.objects.get(pk=random.randint(1, 300))
+        #     CustomerTruck.objects.create(registration=registration, customer=customer, truck=truck)
 
-        for _ in range(200):
-            customer = Customer.objects.get(pk=random.randint(100, 200))
-            name = fake.name()
-            driver = Driver.objects.get(pk=random.randint(100, 200))
-            CustomerDriver.objects.create(customer=customer, name=name, driver=driver)
+        # for _ in range(50):
+        #     customer = Customer.objects.get(pk=random.randint(100, 200))
+        #     name = fake.name()
+        #     driver = Driver.objects.get(pk=random.randint(100, 200))
+        #     CustomerDriver.objects.create(customer=customer, name=name, driver=driver)
+        #     print('we here')
 

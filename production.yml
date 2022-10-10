@@ -29,7 +29,7 @@ services:
     build:  
       context: ./ops_front
       dockerfile: Dockerfile
-    image: ops_front_image
+    image: gechcode/agolfront
     environment:
       # - API=http://agolapi:8080
       - PORT=8080
@@ -39,7 +39,7 @@ services:
     #   - ./ops_front/nginx.conf:/etc/nginx/conf.d/default.conf:ro
     #   # - ./dist:/ops/build
     ports:
-      - "8080:80"
+      - "8080:8080"
 
   # postgres:
   #   build:

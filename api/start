@@ -14,7 +14,7 @@ set -e
 
 # Apply database migrations
 echo "Creating Data"
-python ./manage.py createdata &
+# python ./manage.py createdata &
 
 # python manage.py migrate &
 # python /app/manage.py collectstatic --noinput &

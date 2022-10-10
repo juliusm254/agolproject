@@ -124,14 +124,14 @@ USER django
 # to be equal to the cores available.
 # Timeout is set to 0 to disable the timeouts of the workers to allow Cloud Run to handle instance scaling.
 ENV PORT 8000
-# CMD exec gunicorn --bind 0.0.0.0:$PORT --workers 1 --threads 8 --timeout 0 config.wsgi --chdir=/app
+CMD exec gunicorn --bind 0.0.0.0:$PORT --workers 1 --threads 8 --timeout 0 config.wsgi --chdir=/app
 
 # ENTRYPOINT ["/entrypoint"]
 # ENV PORT 80
 
 # ENTRYPOINT ["/tini", "--"]
 
-CMD ["./start" ]
+# CMD ["./start" ]
 # CMD [ "start", "./start","envsubst '\$PORT' < /etc/nginx/conf.d/configfile.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"]
 # FROM traefik:v2.2.11
 # RUN mkdir -p /etc/traefik/acme \
