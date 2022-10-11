@@ -26,8 +26,8 @@ services:
   postgres:
     build:
       context: .
-      dockerfile: ./compose/production/postgres/Dockerfile
-    image: agol_production_postgres
+      dockerfile: ./compose/local/postgres/Dockerfile
+    image: agol_local_postgres
     container_name: agol_local_postgres
     volumes:
       - agol_local_postgres_data:/var/lib/postgresql/data:Z
@@ -52,6 +52,20 @@ services:
       - "9000:9000"
     command: /start-docs
 
+  # ops_front:
+  #   container_name: ops_front
+  #   restart: always
+  #   build:  
+  #     context: ./ops_front
+  #     dockerfile: Dockerfile
+  #   image: ops_front_image
+  #   depends_on:
+  #     - agolapi
+  #   volumes:
+  #     - ./ops_front/nginx:/etc/nginx/conf.d
+  #   ports:
+  #     - 81:80
+
   ops_front:
     container_name: ops_front
     restart: always
@@ -59,29 +73,15 @@ services:
       context: ./ops_front
       dockerfile: Dockerfile
     image: ops_front_image
+    volumes:
+      - ./ops_front/nginx:/etc/nginx/conf.d
+    # environment:
+      # - API=http://agolapi:8080
+      # - PORT=8080
     depends_on:
       - agolapi
     volumes:
-      - ./ops_front/nginx:/etc/nginx/conf.d
+      - ./ops_front/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./dist:/ops/build
     ports:
-      - 81:80
-
-    ops_front:
-      container_name: ops_front
-      restart: always
-      build:  
-        context: ./ops_front
-        dockerfile: Dockerfile
-      image: ops_front_image
-      volumes:
-        - ./ops_front/nginx:/etc/nginx/conf.d
-      # environment:
-        # - API=http://agolapi:8080
-        # - PORT=8080
-      depends_on:
-        - django
-      volumes:
-        - ./ops_front/nginx.conf:/etc/nginx/conf.d/default.conf:ro
-        - ./dist:/ops/build
-      ports:
-        - "8080:8080"
+      - "8080:8080"
