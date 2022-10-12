@@ -7,7 +7,7 @@ volumes:
 services:
   agolapi:
     build:
-      context: .
+      context: ./api
       dockerfile: ./compose/local/django/Dockerfile
     image: agol_local_django
     container_name: agol_local_django
@@ -17,15 +17,15 @@ services:
     volumes:
       - .:/app:z
     env_file:
-      - ./.envs/.local/.django
-      - ./.envs/.local/.postgres
+      - ./api/.envs/.local/.django
+      - ./api/.envs/.local/.postgres
     ports:
       - "8000:8000"
-    command: /start
+    command: /start-local
 
   postgres:
     build:
-      context: .
+      context: ./api
       dockerfile: ./compose/local/postgres/Dockerfile
     image: agol_local_postgres
     container_name: agol_local_postgres
@@ -33,17 +33,17 @@ services:
       - agol_local_postgres_data:/var/lib/postgresql/data:Z
       - agol_local_postgres_data_backups:/backups:z
     env_file:
-      - ./.envs/.local/.postgres
+      - ./api/.envs/.local/.postgres
 
   docs:
     image: agol_local_docs
     container_name: agol_local_docs
     platform: linux/x86_64
     build:
-      context: .
+      context: ./api
       dockerfile: ./compose/local/docs/Dockerfile
     env_file:
-      - ./.envs/.local/.django
+      - ./api/.envs/.local/.django
     volumes:
       - ./docs:/docs:z
       - ./config:/app/config:z
@@ -67,7 +67,7 @@ services:
   #     - 81:80
 
   ops_front:
-    container_name: ops_front
+    container_name: ops_front_local
     restart: always
     build:  
       context: ./ops_front
