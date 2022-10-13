@@ -59,13 +59,13 @@ class Command(BaseCommand):
             question_desc = fake.sentence()
             SafetyChecklistQuestion.objects.create(question_desc=question_desc)
 
-        for _ in range(200):
+        for _ in range(20):
             customer = Customer.objects.get(pk=random.randint(1, 100))
             registration = fake.license_plate()
             trailer = Vehicle.objects.get(pk=random.randint(1, 300))
             CustomerTrailer.objects.create(registration=registration, customer=customer, trailer=trailer)
 
-        for _ in range(200):
+        for _ in range(50):
             customer = Customer.objects.get(pk=random.randint(1, 100))
             registration = fake.license_plate()
             truck = Vehicle.objects.get(pk=random.randint(1, 300))

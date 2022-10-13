@@ -66,7 +66,7 @@ export default {
   },
   methods: {
     async getOrders() {
-      // this.$store.commit('setIsLoading', true)
+      this.$store.commit('setIsLoading', true)
       // this.showNextButton = false
       // this.showPreviousButton = false
       await axios
@@ -79,7 +79,7 @@ export default {
         .catch((error) => {
           console.log(error);
         });
-      // this.$store.commit('setIsLoading', false)
+      this.$store.commit('setIsLoading', true)
     },
     async submitForm(value) {
       //         let config = {

@@ -16,7 +16,8 @@
     "pdfjs-dist": "^2.16.105",
     "vue": "^3.2.37",
     "vue-router": "^4.1.5",
-    "vuex": "^4.0.2"
+    "vuex": "^4.0.2",
+    "@volar-plugins/vetur": "latest"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^3.0.0",

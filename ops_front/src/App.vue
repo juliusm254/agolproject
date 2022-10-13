@@ -15,7 +15,27 @@
     <router-link to="/login">Login</router-link> |
   </div>
   <router-view />
+  <the-loader v-if="isLoading" ></the-loader>
+  <!-- <TheLoader v-if="isLoading" /> -->
 </template>
+
+<script>
+// import TheNavigation from './components/TheNavigation.vue';
+import TheLoader from './components/TheLoader.vue';
+import { mapState } from 'vuex';
+export default {
+    name: 'App',
+    computed: {
+        ...mapState("loading", {
+            isLoading: (state) => state.isLoading,
+        }),
+    },
+    components: {
+        // TheNavigation,
+        TheLoader,
+    },
+};
+</script>
 
 <style>
 
