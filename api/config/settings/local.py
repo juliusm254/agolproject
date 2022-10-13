@@ -13,6 +13,35 @@ SECRET_KEY = env(
 # https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = ["*"]
 
+
+CORS_ORIGIN_ALLOW_ALL = True
+
+
+# ALLOWED_HOSTS = [
+#    "0.0.0.0:8000",
+#    "127.0.0.1",
+#    "agolfront-bvtwuypbsq-uc.a.run.app",
+#    "agol-bvtwuypbsq-km.a.run.app",
+#    "https://agolfront-bvtwuypbsq-uc.a.run.app/",
+#    "https://agol-bvtwuypbsq-km.a.run.app",
+
+# ]
+CORS_ALLOWED_ORIGINS = [ "http://localhost:81", ]
+# CORS_ALLOWED_ORIGINS = [
+#     "http://0.0.0.0:8000",
+#     "http://172.18.0.2:8080",
+#     "http://172.18.0.2",
+#     "https://agolfront-bvtwuypbsq-uc.a.run.app",
+#     "https://agolfront-bvtwuypbsq-uc.a.run.app:8080",
+#     "https://agolfront-bvtwuypbsq-uc.a.run.app:80",
+#     "https://agol-bvtwuypbsq-km.a.run.app",
+#     "http://127.0.0.1",
+#     "http://localhost",
+#     "http://127.0.0.1:80",
+#     "http://localhost:8080",]
+
+
+
 # CACHES
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#caches

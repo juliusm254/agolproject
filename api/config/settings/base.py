@@ -55,34 +55,34 @@ ROOT_URLCONF = "config.urls"
 # https://docs.djangoproject.com/en/dev/ref/settings/#wsgi-application
 WSGI_APPLICATION = "config.wsgi.application"
 
-CORS_ORIGIN_ALLOW_ALL = True
-CORS_ORIGIN_WHITELIST = (
-    "agolfront-bvtwuypbsq-uc.a.run.app",
-)
+# CORS_ORIGIN_ALLOW_ALL = True
+# CORS_ORIGIN_WHITELIST = (
+#     "agolfront-bvtwuypbsq-uc.a.run.app",
+# )
 
 
-ALLOWED_HOSTS = [
-   "0.0.0.0:8000",
-   "127.0.0.1",
-   "agolfront-bvtwuypbsq-uc.a.run.app",
-   "agol-bvtwuypbsq-km.a.run.app",
-   "https://agolfront-bvtwuypbsq-uc.a.run.app/",
-   "https://agol-bvtwuypbsq-km.a.run.app",
+# ALLOWED_HOSTS = [
+#    "0.0.0.0:8000",
+#    "127.0.0.1",
+#    "agolfront-bvtwuypbsq-uc.a.run.app",
+#    "agol-bvtwuypbsq-km.a.run.app",
+#    "https://agolfront-bvtwuypbsq-uc.a.run.app/",
+#    "https://agol-bvtwuypbsq-km.a.run.app",
 
-]
+# ]
 
-CORS_ALLOWED_ORIGINS = [
-    "http://0.0.0.0:8000",
-    "http://172.18.0.2:8080",
-    "http://172.18.0.2",
-    "https://agolfront-bvtwuypbsq-uc.a.run.app",
-    "https://agolfront-bvtwuypbsq-uc.a.run.app:8080",
-    "https://agolfront-bvtwuypbsq-uc.a.run.app:80",
-    "https://agol-bvtwuypbsq-km.a.run.app",
-    "http://127.0.0.1",
-    "http://localhost",
-    "http://127.0.0.1:8080",
-    "http://localhost:8080",]
+# CORS_ALLOWED_ORIGINS = [
+#     "http://0.0.0.0:8000",
+#     "http://172.18.0.2:8080",
+#     "http://172.18.0.2",
+#     "https://agolfront-bvtwuypbsq-uc.a.run.app",
+#     "https://agolfront-bvtwuypbsq-uc.a.run.app:8080",
+#     "https://agolfront-bvtwuypbsq-uc.a.run.app:80",
+#     "https://agol-bvtwuypbsq-km.a.run.app",
+#     "http://127.0.0.1",
+#     "http://localhost",
+#     "http://127.0.0.1:80",
+#     "http://localhost:8080",]
 
 CORS_ALLOW_HEADERS = list(default_headers) + [
     'contenttype',
@@ -127,10 +127,10 @@ THIRD_PARTY_APPS = [
     
 
 LOCAL_APPS = [
-    "agol.users",
+    # "agol.users",
     "agol.operations",
     "agol.customers",
-    # "agol.accounts"
+    "agol.accounts"
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -149,7 +149,7 @@ AUTHENTICATION_BACKENDS = [
     "allauth.account.auth_backends.AuthenticationBackend",
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#auth-user-model
-AUTH_USER_MODEL = "users.User"
+AUTH_USER_MODEL = "accounts.User"
 # https://docs.djangoproject.com/en/dev/ref/settings/#login-redirect-url
 LOGIN_REDIRECT_URL = "users:redirect"
 # https://docs.djangoproject.com/en/dev/ref/settings/#login-url
