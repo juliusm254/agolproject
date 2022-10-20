@@ -19,6 +19,8 @@ onMounted(() => {
         <h1 class="title">Safety Inspection List</h1>
       </div>
 
+      <!-- Table -->
+
       <div class="flex items-center justify-center">
         <table class="table-auto">
           <thead>
@@ -28,7 +30,6 @@ onMounted(() => {
               <th class="border border-gray-400 px-4 py-2 text-gray-800">Transporter</th>
               <th class="border border-gray-400 px-4 py-2 text-gray-800">Trailer</th>
               <th class="border border-gray-400 px-4 py-2 text-gray-800">Transporter</th>
-
               <th class="border border-gray-400 px-4 py-2 text-gray-800"></th>
             </tr>
           </thead>
@@ -40,22 +41,19 @@ onMounted(() => {
               <td class="border border-gray-400 px-4 py-2 text-gray-800">{{ order.truck_details["transporter"] }}</td>
               <td class="border border-gray-400 px-4 py-2 text-gray-800">{{ order.trailer_details["registration"] }}</td>
               <td class="border border-gray-400 px-4 py-2 text-gray-800">{{ order.trailer_details["transporter"] }}</td>
-
-              <td class="border border-gray-400 px-4 py-2 text-gray-800">
-              
-                  <!-- {{orders}} -->
-
+              <td class="border border-gray-400 px-4 py-2 text-gray-800">              
                   <router-link class="btn-primary"
                     :to="`/safety-checklist/${order.id}`"
                     >Edit</router-link
                   >
-                  <!-- <router-link :to="{ name: 'Safetyform', params: { id: order.id }}" class="button is-light">Edit</router-link> -->
-             
               </td>
             </tr>
           </tbody>
         </table>
       </div>
+
+       <!-- Table -->
+
     </div>
   </div>
 </template>
