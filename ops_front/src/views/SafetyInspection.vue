@@ -1,43 +1,56 @@
+<script setup>
+import { onMounted } from 'vue'
+import { useApi } from "../resources/composables/useApi";
+
+const { safetyInspectionList, getSafetyInspectionList } = useApi();
+
+onMounted(() => {
+  //script
+  getSafetyInspectionList()
+})
+
+</script>
+
+
 <template>
-  <div class="container">
-    <div class="columns is-multiline">
-      <div class="column is-12">
-        <h1 class="title">Saaaafety</h1>
+  <div class="">
+    <div class="">
+      <div class="">
+        <h1 class="title">Safety Inspection List</h1>
       </div>
 
-      <div class="column is-12">
-        <table class="table is-fullwidth">
+      <div class="flex items-center justify-center">
+        <table class="table-auto">
           <thead>
             <tr>
-              <th>ID</th>
-              <th>Truck</th>
-              <th>Transporter</th>
-              <th>Trailer</th>
-              <th>Transporter</th>
+              <th class="border border-gray-400 px-4 py-2 text-gray-800">ID</th>
+              <th class="border border-gray-400 px-4 py-2 text-gray-800">Truck</th>
+              <th class="border border-gray-400 px-4 py-2 text-gray-800">Transporter</th>
+              <th class="border border-gray-400 px-4 py-2 text-gray-800">Trailer</th>
+              <th class="border border-gray-400 px-4 py-2 text-gray-800">Transporter</th>
 
-              <th></th>
+              <th class="border border-gray-400 px-4 py-2 text-gray-800"></th>
             </tr>
           </thead>
 
           <tbody>
-            <tr v-for="order in orders" v-bind:key="order.id">
-              <td>{{ order.id }}</td>
-              <td>{{ order.truck_details["registration"] }}</td>
-              <td>{{ order.truck_details["transporter"] }}</td>
-              <td>{{ order.trailer_details["registration"] }}</td>
-              <td>{{ order.trailer_details["transporter"] }}</td>
+            <tr v-for="order in safetyInspectionList" v-bind:key="order.id">
+              <td class="border border-gray-400 px-4 py-2 text-gray-800">{{ order.id }}</td>
+              <td class="border border-gray-400 px-4 py-2 text-gray-800">{{ order.truck_details["registration"] }}</td>
+              <td class="border border-gray-400 px-4 py-2 text-gray-800">{{ order.truck_details["transporter"] }}</td>
+              <td class="border border-gray-400 px-4 py-2 text-gray-800">{{ order.trailer_details["registration"] }}</td>
+              <td class="border border-gray-400 px-4 py-2 text-gray-800">{{ order.trailer_details["transporter"] }}</td>
 
-              <td>
-                <button>
+              <td class="border border-gray-400 px-4 py-2 text-gray-800">
+              
                   <!-- {{orders}} -->
 
-                  <router-link
+                  <router-link class="btn-primary"
                     :to="`/safety-checklist/${order.id}`"
-                    class="button is-light"
                     >Edit</router-link
                   >
                   <!-- <router-link :to="{ name: 'Safetyform', params: { id: order.id }}" class="button is-light">Edit</router-link> -->
-                </button>
+             
               </td>
             </tr>
           </tbody>
@@ -46,8 +59,18 @@
     </div>
   </div>
 </template>
+<!-- 
+<script setup>
+import axios from "axios";
 
-<script>
+
+
+
+
+
+</script> -->
+
+<!-- <script>
 import axios from "axios";
 
 // import { toast } from 'bulma-toast'
@@ -102,4 +125,4 @@ export default {
     },
   },
 };
-</script>
+</script> -->

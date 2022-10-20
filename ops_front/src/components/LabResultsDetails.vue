@@ -1,3 +1,27 @@
+<script setup>
+import { onMounted, ref } from 'vue'
+import { useApi } from "../resources/composables/useApi";
+// import  useSafetyForm from "../resources/composables/trucks";
+
+const { trailer, truck, labResultsDetail, getTruck, getLabResultsDetail } = useApi();
+// const { truckid } = useSafetyForm();
+
+// const trailler = ref("");
+
+//  trailler.value = truckid.trailer_details.registration
+
+
+onMounted(() => {
+  //script
+  getLabResultsDetail();
+  getTruck()
+})
+
+
+</script>
+
+<!-- 
+
 <script>
 import axios from "axios";
 import useSafetyForm from "../resources/composables/trucks";
@@ -84,19 +108,23 @@ export default {
 
   //   }
 };
-</script>
+</script> -->
 
 <template>
   <div>
-    <h4>Truck Reg: {{ truck }}</h4>
-    <h4>Trailer Reg: {{ trailer }}</h4>
+    <h4>Truck Reg: {{truck}}</h4>
+    <h4>Trailer Reg: {{trailer}}</h4>
   </div>
   <h3>Lab Results</h3>
+ 
+  <p>{{labResultsDetail}}</p>
+  <p>{{}}</p>
+  <!-- <p>{{truckid.trailer_details.registration}}</p> -->
 
-  <h4>Oxygen: {{ labResults.oxygen }}</h4>
-  <h4>Pressure: {{ labResults.pressure }}</h4>
-  <h4>Nitrogen: {{ labResults.nitrogen }}</h4>
-  <h4>Methane: {{ labResults.methane }}</h4>
+  <h4>Oxygen: {{ labResultsDetail.oxygen }}</h4>
+  <h4>Pressure: {{ labResultsDetail.pressure }}</h4>
+  <h4>Nitrogen: {{ labResultsDetail.nitrogen }}</h4>
+  <h4>Methane: {{ labResultsDetail.methane }}</h4>
   <!-- </div> -->
   <div>
     <button @click="submitForm" type="submit" value="LOADING">Proceed</button>

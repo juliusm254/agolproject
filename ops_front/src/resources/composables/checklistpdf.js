@@ -35,7 +35,7 @@ export default function useSafetyInspectionForm() {
     const link = document.createElement("a");
     link.href = url;
 
-    // link.setAttribute("download");
+    link.setAttribute("download","download");
     document.body.appendChild(link);
     link.click();
     link.remove();
@@ -46,3 +46,38 @@ export default function useSafetyInspectionForm() {
     getInspectionPrintout,
   };
 }
+// Another way that might work
+
+// async submitForm(value) {
+  //   //         let config = {
+  //   //     headers: {
+  //   //         "Content-Type": 'application/octet-stream; charset=utf-8'
+  //   //         "Content-Disposition": "attachment"; filename="filename.jpg"; filename*="filename.jpg"
+
+  //   //     }
+  //   //   }
+
+  //   await axios
+  //     .get(`/checklist/${value.target.value}`)
+  //     .then((response) => {
+  //       const blob = new Blob([response.data], { type: response.data.type });
+  //       const url = window.URL.createObjectURL(blob);
+  //       const link = document.createElement("a");
+  //       link.href = url;
+  //       const contentDisposition = response.headers["content-disposition"];
+  //       let fileName = "Safety Inspection";
+  //       if (contentDisposition) {
+  //         const fileNameMatch = contentDisposition.match(/filename="(.+)"/);
+  //         if (fileNameMatch.length === 2) fileName = fileNameMatch[1];
+  //       }
+  //       link.setAttribute("download", fileName);
+  //       document.body.appendChild(link);
+  //       link.click();
+  //       link.remove();
+  //       window.URL.revokeObjectURL(url);
+  //     })
+
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // },

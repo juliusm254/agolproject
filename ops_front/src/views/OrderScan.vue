@@ -1,11 +1,11 @@
 <template>
-  <div class="container">
-    <div class="columns is-multiline">
-      <div class="column is-12">
+  <div class="">
+    <div class="">
+      <div class="">
         <h1 class="title">Scan Order</h1>
       </div>
 
-      <div class="column is-12">
+      <div class="flex items-center justify-center">
         <form @submit.prevent="submitForm">
           <div class="field">
             <label>Order No.</label>

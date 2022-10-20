@@ -71,7 +71,7 @@ services:
     restart: always
     build:  
       context: ./ops_front
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile-local
     image: ops_front_image
     # volumes:
     #   - ./ops_front/nginx:/etc/nginx/conf.d

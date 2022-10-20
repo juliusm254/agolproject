@@ -7,6 +7,13 @@ module.exports = {
   mode:'jit',
   theme: {
     extend: {},
+    fontFamily: {
+      'sans': ['Inter', 'Avenir', 'Helvetica',  'system-ui', 'Arial',],
+      'serif': ['Georgia', 'ui-sans-serif', 'sans-serif'],
+      'mono': ['ui-monospace', 'SFMono-Regular',],
+      'display': ['Oswald',],
+      'body': ['"Open Sans"',],
+    }
   },
   plugins: [],
 }
