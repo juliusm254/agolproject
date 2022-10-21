@@ -27,20 +27,20 @@
               <!-- Logo -->
               
               <!-- Menu Links -->
-              <div class="flex items-center space-x-2 py-5 px-2">
+              <div class="flex items-center  py-5 px-2">
                 <a href="/" class="text-white text-lg hover:text-indigo-400 font-semibold py-5 px-4 rounded inline-flex items-center">Home</a>
                 <a href="/orderscan" class="text-white text-lg hover:text-indigo-400 font-semibold py-5 px-4 rounded inline-flex items-center">Scan Order</a>
               </div>
               <!-- Menu Links -->
               
-              <!-- Group Hover -->
+              <!-- Lab Dropdown -->
 
-              <div class="flex items-center space-x-2 py-5 px-2">
+              <div class="flex items-center py-5 px-2">
                 <div class="group inline-block relative">
                   <button
                     class=" text-white text-lg hover:text-indigo-400 font-semibold rounded px-2 inline-flex items-center"
                   >
-                    <span class="mr-3">Lab</span>
+                    <span class="mr-1">Lab</span>
                     <svg
                       class="fill-current h-4 w-4 mr-2"
                       xmlns="http://www.w3.org/2000/svg"
@@ -53,11 +53,10 @@
                   </button>
                   <ul class="absolute hidden rounded-t font-semibold drop-shadow-xl bg-white text-gray-700 pt-0 group-hover:block">
                     <li class="">
-                      <a
+                      <router-link
                         class="rounded-t  hover:bg-indigo-400 hover:text-white py-2 px-4 block whitespace-no-wrap"
-                        href="/lab-inspection"
-                        >Inspection</a
-                      >
+                        :to="`/lab-inspection`"
+                        >Inspection</router-link>
                     </li>
                     <li class="">
                       <!-- <a
@@ -72,41 +71,38 @@
                       </router-link>
                     </li>
                     <li class="">
-                      <a
+                      <router-link
                         class="rounded hover:text-white hover:bg-indigo-400 py-2 px-4 block whitespace-no-wrap"
-                        href="/lab-seal"
-                        >Seal</a
-                      >
+                        :to="`/lab-seal`"
+                        >Seal</router-link>
                     </li>
                     <li class="">
-                      <a
+                      <router-link
                         class="rounded hover:text-white hover:bg-indigo-400 py-2 px-4 block whitespace-no-wrap"
-                        href="/vent"
-                        >Vent</a
-                      >
+                        :to="`/lab-vent`"
+                        >Vent</router-link>
                     </li>
                     <li class="">
-                      <a
+                      <router-link
                         class="rounded hover:text-white hover:bg-indigo-400 py-2 px-4 block whitespace-no-wrap"
-                        href="/lab-seal"
-                        >Warning</a
-                      >
+                        :to="`/lab-seal`"
+                        >Warning</router-link>
                     </li>
                   </ul>
                 </div>
               </div>
 
-              <!-- Grouphover -->
+              <!-- Lab Dropdown -->
 
-              <!-- Group Hover -->
-              <div class="flex items-center space-x-2 py-5 px-2">
-                <div class="group inline-block relative">
+              <!-- Safety Dropdown -->
+              <div class="flex items-center py-5 px-2">
+                <div class="group inline-block relative ">
                   <button
-                    class=" text-white text-lg hover:text-indigo-400 font-semibold px-2 rounded inline-flex items-center"
+                    class=" text-white text-lg hover:text-indigo-400 font-semibold rounded inline-flex items-center"
                   >
-                    <span class="mr-3">Safety</span>
+                    <span class="mr-1">Safety</span>
                     <svg
-                      class="fill-current h-4 w-4 mr-4"
+                      class="fill-current h-4 w-4 ml-2"
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 20 20"
                     >
@@ -141,7 +137,13 @@
                 </div>
               </div>
               
-              <!-- Group Hover -->
+               <!-- Safety Dropdown -->
+
+              <div class="flex items-center py-5 px-2">
+                <router-link :to="`/loading`" class="text-white text-lg hover:text-indigo-400 font-semibold py-5 px-4 rounded inline-flex items-center">Loading</router-link>
+                <a href="/orderscan" class="text-white text-lg hover:text-indigo-400 font-semibold py-5 px-4 rounded inline-flex items-center">Scan Order</a>
+              </div>
+              
                               
             </div>
         </div>

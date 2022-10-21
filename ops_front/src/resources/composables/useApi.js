@@ -7,8 +7,13 @@ const safetyInspectionList = ref([]);
 const labInspectionList = ref([]);
 const labResultsList = ref([]);
 const labResultsDetail = ref([]);
+const labSealList = ref([]);
+const labDetail = ref([]);
+const labVentList = ref("");
+const loadingList = ref([]);
 const trailer = ref("");
 const truck = ref("");
+
 
 export const useApi = () => {
 
@@ -37,11 +42,30 @@ export const useApi = () => {
         const response = await axios.get(`/lab-results/`);
         labResultsList.value = response.data
     };
-
+    // Repeated in labdeta
     const getLabResultsDetail = async () => {
         let response = await axios.get(`/lab-results/${orderid.value}`);
         console.log(response.data);
         labResultsDetail.value = response.data[0];
+    };
+
+    const getLabSealList = async () => {
+        const response = await axios.get(`/lab-seal/`);
+        labSealList.value = response.data
+    };
+    const getLabDetail = async () => {
+        let response = await axios.get(`/lab-results/${orderid.value}`);
+        console.log(response.data);
+        labDetail.value = response.data[0];
+    };
+
+    const getLabVentList = async () => {
+        const response = await axios.get(`/lab-vent/`)
+        labVentList.value = response.data
+    };
+    const getLoadingList = async () => {
+        const response = await axios.get(`/loading-list/`);
+        loadingList.value = response.data
     };
 
     const getTruck = async () => {
@@ -59,14 +83,22 @@ export const useApi = () => {
             labInspectionList,
             labResultsList,
             labResultsDetail,
+            labSealList,
+            labDetail,
+            labVentList,
+            loadingList,
             truck,
             trailer,
             orderid,
             getPrintSafetyList,
             getSafetyInspectionList,
-            getLabResultsDetail,
             getLabInspectionList,
             getLabResultsList,
+            getLabResultsDetail,
+            getLabSealList,
+            getLabDetail,
+            getLabVentList,
+            getLoadingList,
             getTruck
     };
 };
