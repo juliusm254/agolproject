@@ -5,6 +5,7 @@ from datetime import datetime
 from rest_framework import status, serializers
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticated
 from .models import SafetyChecklist
 # from customers.serializers import OrderSerializer
 from .services import checklist_create, lab_create, loading_create, lab_results_create
@@ -171,14 +172,20 @@ class LabInspectionCreateAPI(APIView):
         pressure = serializers.IntegerField()
         oxygen = serializers.IntegerField()
         methane = serializers.IntegerField()
+        nitrogen = serializers.IntegerField()
         order_id = serializers.IntegerField()
 
     def post(self, request):
         order = self.request.data['order']
         pressure = self.request.data['truck_pressure']
         oxygen = self.request.data['oxygen_content']
+        nitrogen = self.request.data['nitrogen_content']
         methane = self.request.data['methane_content'] 
-        serializer = self.InputSerializer(data={'order_id':order, 'pressure':pressure, 'oxygen':oxygen, 'methane':methane})
+        serializer = self.InputSerializer(data={'order_id':order, 
+                                                'pressure':pressure, 
+                                                'oxygen':oxygen, 
+                                                'methane':methane, 
+                                                'nitrogen':nitrogen})
         serializer.is_valid(raise_exception=True)
         lab_create(**serializer.validated_data)
         return Response(status=status.HTTP_201_CREATED)
@@ -240,6 +247,7 @@ class LabVentListAPI(APIView):
         return Response(serializer.data)
 
 class LoadingListAPI(APIView):
+    permission_classes = [IsAuthenticated,]
     class OutputSerializer(serializers.Serializer):
         id = serializers.CharField()
         trailer_details = VehicleSerializer(source="trailer", read_only=True)

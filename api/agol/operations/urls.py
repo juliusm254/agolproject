@@ -5,6 +5,9 @@ from operations.views import (LoginView,
                     SafetyCheckListQuestionCreateAPIView,
                     
                     )
+from rest_framework_simplejwt.views import (
+    TokenRefreshView,
+)
 
 from operations.api import (
                     ChecklistCreateAPI, 
@@ -26,6 +29,7 @@ from operations.api import (
 urlpatterns = [    
     
     path("login/", LoginView.as_view(), name="login"),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('order/<int:pk>/', OrderDetailView.as_view(), name="order_details"),
     path("scan-order/<int:pk>/", ScanOrder.as_view(), name="scan-order"),
     path('checklistcreate/', ChecklistCreateAPI.as_view(), name="check-list"),    

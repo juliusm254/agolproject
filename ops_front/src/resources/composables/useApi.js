@@ -1,6 +1,7 @@
 import { ref } from "vue";
 import axios from "axios";
 import { useRoute } from "vue-router";
+import store from "../../store";
 
 const safetyList = ref([]);
 const safetyInspectionList = ref([]);
@@ -15,7 +16,22 @@ const trailer = ref("");
 const truck = ref("");
 
 
+
+
 export const useApi = () => {
+    // const authData = store.getters["auth/getLoginStatus"].access_token;
+    // const authData = localStorage.getItem("access_token");
+
+    
+
+    // const config = {
+    //     headers: {
+    //       "Authorization": `Bearer ${authData}`,
+    //     },
+    //   };
+
+    //   console.log(config)
+
 
 
     const route = useRoute();

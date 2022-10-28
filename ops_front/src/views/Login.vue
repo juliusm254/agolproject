@@ -57,7 +57,7 @@ export default {
   },
   computed: {
     ...mapGetters("auth", {
-      loginState: "getLoginState",
+      loginState: "getLoginStatus",
     }),
   },
   // created() {

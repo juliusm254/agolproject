@@ -141,7 +141,8 @@
 
               <div class="flex items-center py-5 px-2">
                 <router-link :to="`/loading`" class="text-white text-lg hover:text-indigo-400 font-semibold py-5 px-4 rounded inline-flex items-center">Loading</router-link>
-                <a href="/orderscan" class="text-white text-lg hover:text-indigo-400 font-semibold py-5 px-4 rounded inline-flex items-center">Scan Order</a>
+                <router-link :to="`/login`" class="text-white text-lg hover:text-indigo-400 font-semibold py-5 px-4 rounded inline-flex items-center">Login</router-link>
+                <!-- <a href="/orderscan" class="text-white text-lg hover:text-indigo-400 font-semibold py-5 px-4 rounded inline-flex items-center">Scan Order</a> -->
               </div>
               
                               

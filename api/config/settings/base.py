@@ -115,9 +115,9 @@ DJANGO_APPS = [
 THIRD_PARTY_APPS = [
     "crispy_forms",
     "crispy_bootstrap5",
-    "allauth",
-    "allauth.account",
-    "allauth.socialaccount",
+    # "allauth",
+    # "allauth.account",
+    # "allauth.socialaccount",
     'rest_framework',
     'rest_framework.authtoken',
     'rest_framework_simplejwt',
@@ -146,14 +146,15 @@ MIGRATION_MODULES = {"sites": "agol.contrib.sites.migrations"}
 # https://docs.djangoproject.com/en/dev/ref/settings/#authentication-backends
 AUTHENTICATION_BACKENDS = [
     "django.contrib.auth.backends.ModelBackend",
-    "allauth.account.auth_backends.AuthenticationBackend",
+    # "allauth.account.auth_backends.AuthenticationBackend",
+    'django.contrib.auth.backends.ModelBackend',
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#auth-user-model
 AUTH_USER_MODEL = "accounts.User"
-# https://docs.djangoproject.com/en/dev/ref/settings/#login-redirect-url
-LOGIN_REDIRECT_URL = "users:redirect"
-# https://docs.djangoproject.com/en/dev/ref/settings/#login-url
-LOGIN_URL = "account_login"
+# # https://docs.djangoproject.com/en/dev/ref/settings/#login-redirect-url
+# LOGIN_REDIRECT_URL = "users:redirect"
+# # https://docs.djangoproject.com/en/dev/ref/settings/#login-url
+# LOGIN_URL = "account_login"
 
 # PASSWORDS
 # ------------------------------------------------------------------------------
@@ -236,7 +237,7 @@ TEMPLATES = [
                 "django.template.context_processors.static",
                 "django.template.context_processors.tz",
                 "django.contrib.messages.context_processors.messages",
-                "agol.users.context_processors.allauth_settings",
+                # "agol.users.context_processors.allauth_settings",
             ],
         },
     }
@@ -310,29 +311,29 @@ LOGGING = {
 
 
 # django-allauth
-# ------------------------------------------------------------------------------
-ACCOUNT_ALLOW_REGISTRATION = env.bool("DJANGO_ACCOUNT_ALLOW_REGISTRATION", True)
-# https://django-allauth.readthedocs.io/en/latest/configuration.html
-ACCOUNT_AUTHENTICATION_METHOD = "username"
-# https://django-allauth.readthedocs.io/en/latest/configuration.html
-ACCOUNT_EMAIL_REQUIRED = True
-# https://django-allauth.readthedocs.io/en/latest/configuration.html
-ACCOUNT_EMAIL_VERIFICATION = "mandatory"
-# https://django-allauth.readthedocs.io/en/latest/configuration.html
-ACCOUNT_ADAPTER = "agol.users.adapters.AccountAdapter"
-# https://django-allauth.readthedocs.io/en/latest/forms.html
-ACCOUNT_FORMS = {"signup": "agol.users.forms.UserSignupForm"}
-# https://django-allauth.readthedocs.io/en/latest/configuration.html
-SOCIALACCOUNT_ADAPTER = "agol.users.adapters.SocialAccountAdapter"
-# https://django-allauth.readthedocs.io/en/latest/forms.html
-SOCIALACCOUNT_FORMS = {"signup": "agol.users.forms.UserSocialSignupForm"}
+# # ------------------------------------------------------------------------------
+# ACCOUNT_ALLOW_REGISTRATION = env.bool("DJANGO_ACCOUNT_ALLOW_REGISTRATION", True)
+# # https://django-allauth.readthedocs.io/en/latest/configuration.html
+# ACCOUNT_AUTHENTICATION_METHOD = "username"
+# # https://django-allauth.readthedocs.io/en/latest/configuration.html
+# ACCOUNT_EMAIL_REQUIRED = True
+# # https://django-allauth.readthedocs.io/en/latest/configuration.html
+# ACCOUNT_EMAIL_VERIFICATION = "mandatory"
+# # https://django-allauth.readthedocs.io/en/latest/configuration.html
+# ACCOUNT_ADAPTER = "agol.users.adapters.AccountAdapter"
+# # https://django-allauth.readthedocs.io/en/latest/forms.html
+# ACCOUNT_FORMS = {"signup": "agol.users.forms.UserSignupForm"}
+# # https://django-allauth.readthedocs.io/en/latest/configuration.html
+# SOCIALACCOUNT_ADAPTER = "agol.users.adapters.SocialAccountAdapter"
+# # https://django-allauth.readthedocs.io/en/latest/forms.html
+# SOCIALACCOUNT_FORMS = {"signup": "agol.users.forms.UserSocialSignupForm"}
 
 
 # Your stuff...
 # ------------------------------------------------------------------------------
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(days=30),
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=30),
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=1),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=2),
     'ROTATE_REFRESH_TOKENS': False,
     'BLACKLIST_AFTER_ROTATION': False,
     'UPDATE_LAST_LOGIN': False,
@@ -360,4 +361,15 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_REFRESH_EXP_CLAIM': 'refresh_exp',
     'SLIDING_TOKEN_LIFETIME': timedelta(minutes=5),
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
+}
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES' : ('rest_framework.permissions.IsAuthenticated', ),
+
+    'DEFAULT_AUTHENTICATION_CLASSES':  (
+    # 'rest_framework.authentication.BasicAuthentication',   
+    # 'rest_framework.authentication.TokenAuthentication',
+    # 'rest_framework.authentication.SessionAuthentication',
+    'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
 }

@@ -35,6 +35,7 @@ FROM node:lts-alpine as vue-build
 WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
 COPY package.json ./
+RUN npm install -g npm@8.19.2
 RUN npm i --silent
 COPY . ./
 

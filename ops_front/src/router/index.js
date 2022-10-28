@@ -1,4 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
+import axios from "axios";
+import store from "../store";
 import Home from "../views/Home.vue";
 import OrderScan from "../views/OrderScan.vue";
 import SafetyInspection from "../views/SafetyInspection.vue";
@@ -22,21 +24,25 @@ const routes = [
     path: "/",
     name: "Home",
     component: Home,
+    meta: { requiredAuth: true }
   },
   {
     path: "/orderscan",
     name: "OrderScan",
     component: OrderScan,
+    meta: { requiredAuth: true }
   },
   {
     path: "/safety-inspection",
     name: "SafetyInspection",
     component: SafetyInspection,
+    meta: { requiredAuth: true }
   },
   {
     path: "/safety-checklist/:id",
     name: "Safetyform",
     component: Safetyform,
+    meta: { requiredAuth: true }
   },
   {
     path: "/login",
@@ -47,61 +53,73 @@ const routes = [
     path: "/lab-inspection",
     name: "LabInspection",
     component: LabInspection,
+    meta: { requiredAuth: true }
   },
   {
     path: "/lab-details/:id",
     name: "LabDetails",
     component: LabDetails,
+    meta: { requiredAuth: true }
   },
   {
     path: "/lab-results",
     name: "LabResults",
     component: LabResults,
+    meta: { requiredAuth: true }
   },
   {
     path: "/lab-results/:id",
     name: "LabResultsDetails",
     component: LabResultsDetails,
+    meta: { requiredAuth: true }
   },
   {
     path: "/lab-seal/",
     name: "LabSeal",
     component: LabSeal,
+    meta: { requiredAuth: true }
   },
   {
     path: "/lab-seal/:id",
     name: "LabSealDetails",
     component: LabSealDetails,
+    meta: { requiredAuth: true }
   },
   {
     path: "/lab-vent/",
     name: "LabVent",
     component: LabVent,
+    meta: { requiredAuth: true }
   },
   {
     path: "/lab-vent/:id",
     name: "LabVentDetails",
     component: LabVentDetails,
+    meta: { requiredAuth: true }
   },
   {
     path: "/loading",
     name: "Loading",
     component: Loading,
+    meta: { requiredAuth: true }
   },
   {
     path: "/loading/:id",
     name: "LoadingDetails",
     component: LoadingDetails,
+    meta: { requiredAuth: true }
   },
   {
     path: "/print-safety",
     name: "PrintSafetyInspectionList",
     component: PrintSafetyInspectionList,
+    meta: { requiredAuth: true }
   },
   {
     path: "/print-safety/:id",
     name: "PrintSafetyDetails",
     component: PrintSafetyDetails,
+    meta: { requiredAuth: true }
   },
   {
     path: "/about",
@@ -120,3 +138,47 @@ const router = createRouter({
 });
 
 export default router;
+
+router.beforeEach(async (to, from, next) => {
+  console.log(store.getters["auth/getAuthData"].token);
+  if (!store.getters["auth/getAuthData"].token) {
+    const access_token = localStorage.getItem("access_token");
+    const refresh_token = localStorage.getItem("refresh_token");
+    if (access_token) {
+      const data = {
+        access: access_token,
+        refresh: refresh_token,
+      };
+      store.commit("auth/setUserToken", data);
+    }
+  }
+  let auth = store.getters["auth/isTokenActive"];
+
+  if (!auth) {
+    const authData = store.getters["auth/getAuthData"];
+    if (authData.token) {
+      const payload = {
+        access: authData.token,
+        refresh: localStorage.getItem("refresh_token"),
+      };
+      console.log(payload);
+      const refreshResponse = await axios.post(
+        "api/token/refresh/",
+        payload
+      );
+      store.commit("auth/setRefreshToken", refreshResponse.data);
+      auth = true;
+    }
+  }
+
+  if (to.fullPath == "/") {
+    return next();
+  } else if (auth && !to.meta.requiredAuth) {
+    // return next({ path: "/" });
+    return next();
+  } else if (!auth && to.meta.requiredAuth) {
+    return next({ path: "/login" });
+  }
+
+  return next();
+});

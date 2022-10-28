@@ -14,7 +14,7 @@ SECRET_KEY = env(
 ALLOWED_HOSTS = ["*"]
 
 
-CORS_ORIGIN_ALLOW_ALL = True
+# CORS_ORIGIN_ALLOW_ALL = True
 
 
 # ALLOWED_HOSTS = [
@@ -26,7 +26,7 @@ CORS_ORIGIN_ALLOW_ALL = True
 #    "https://agol-bvtwuypbsq-km.a.run.app",
 
 # ]
-CORS_ALLOWED_ORIGINS = [ "http://localhost:81", ]
+CORS_ALLOWED_ORIGINS = [ "http://127.0.0.1:5174", "http://127.0.0.1:5173",]
 # CORS_ALLOWED_ORIGINS = [
 #     "http://0.0.0.0:8000",
 #     "http://172.18.0.2:8080",
