@@ -66,6 +66,16 @@ services:
   #   ports:
   #     - 81:80
 
+  cust_front:
+    container_name: cust_front_local
+    restart: always
+    build:  
+      context: ./cust_front
+      dockerfile: Dockerfile-local
+    image: cust_front_image
+    ports:
+      - "82:80"
+
   ops_front:
     container_name: ops_front_local
     restart: always
@@ -73,15 +83,13 @@ services:
       context: ./ops_front
       dockerfile: Dockerfile-local
     image: ops_front_image
-    # volumes:
-    #   - ./ops_front/nginx:/etc/nginx/conf.d
-    # environment:
-      # - API=http://agolapi:8080
-      # - PORT=8080
-    # depends_on:
-    #   - agolapi
-    volumes:
-      # - ./ops_front/nginx.conf:/etc/nginx/conf.d/default.conf
-      - ./ops_front/dist:/ops/build
     ports:
       - "81:80"
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment: 
+      - PGADMIN_DEFAULT_EMAIL=bassbassbuff@gmail.com
+      - PGADMIN_DEFAULT_PASSWORD=password
+    ports: 
+      - "5050:80"

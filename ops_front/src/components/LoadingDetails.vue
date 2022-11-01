@@ -2,6 +2,8 @@
 import axios from 'axios'
 import { onMounted, ref } from 'vue'
 import { useApi } from "../resources/composables/useApi";
+import { useRouter, useRoute } from 'vue-router';
+const router = useRouter()
 
 const { orderid, trailer, truck, getTruck } = useApi();
 
@@ -36,6 +38,12 @@ const submitForm = async (value) => {
       await axios.post(`/loading/`, payload).then((response) => {
         console.log(response.data);
       });
+      router.push({
+        name: 'Loading',
+        // query: {
+        //   ...route.query,
+        // },
+      })
     };
 </script>
 

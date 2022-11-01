@@ -25,6 +25,7 @@ class SafetyChecklistQuestion(models.Model):
     question_desc = models.CharField(max_length=255, null=False)
     # created_by = models.DateTimeField(auto_now_add=True)
     # inspection = models.ForeignKey
+    active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True) 
     # created_by = models.DateTimeField(auto_now_add=True)
