@@ -18,7 +18,6 @@ urlpatterns = [
     # path("accounts/", include("allauth.urls")),
     # Your stuff: custom urls includes go here
     path('operations/', include('agol.operations.urls')), 
-    path('customers/', include('agol.customers.urls')), 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 

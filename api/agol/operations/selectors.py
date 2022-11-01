@@ -6,10 +6,7 @@ from django.shortcuts import get_object_or_404
 
 def get_order(pk):
     return get_object_or_404(Order, id=pk)
-    # return get_object_or_404(Order.objects.select_related(), id=pk)
-
-# def get_safetychecklist_questions()-> QuerySet[SafetyChecklistQuestion]:
-#     return (SafetyChecklistQuestion.objects.filter(active=True))
+    return get_object_or_404(Order.objects.select_related(), id=pk)
 
 def order_list(order_status) -> QuerySet[Order]:
     return(Order.objects.filter(order_status=order_status).select_related())
@@ -52,24 +49,24 @@ def checklist_details(pk)-> QuerySet[SafetyChecklist]:
     Long live ORM.
     Peace out.
     '''
-    # return(SafetyChecklist.objects.filter(order__id=pk).prefetch_related(Prefetch('order',
-    #     queryset=Order.objects.select_related()    
-    #     )))
-    # return(Order.objects.filter(id=pk).select_related().prefetch_related(Prefetch('checklistorder',
-    #     queryset=SafetyChecklist.objects.filter(order_id=pk)        
-    #     )))
-    # return(SafetyChecklist.objects.filter(order_id=pk).prefetch_related(Prefetch(
-    #     'question', queryset=Order.objects.filter(id=pk).select_related()
+    return(SafetyChecklist.objects.filter(order__id=pk).prefetch_related(Prefetch('order',
+        queryset=Order.objects.select_related()    
+        )))
+    return(Order.objects.filter(id=pk).select_related().prefetch_related(Prefetch('checklistorder',
+        queryset=SafetyChecklist.objects.filter(order_id=pk)        
+        )))
+    return(SafetyChecklist.objects.filter(order_id=pk).prefetch_related(Prefetch(
+        'question', queryset=Order.objects.filter(id=pk).select_related()
         # .prefetch_related(
     # Prefetch(
     #     'checklistorder',
     #     queryset=SafetyChecklist.objects.prefetch_related('question')
     # )
     # )
-    # )))
-    # return(SafetyChecklist.objects.filter(order_id=pk).select_related())
+    )))
+    return(SafetyChecklist.objects.filter(order_id=pk).select_related())
     # return(SafetyChecklist.objects.filter(order_set__id=pk).prefetch_related("order_id_set"))
-    # return(SafetyChecklist.objects.filter(personscore_set__name="Bob").prefetch_related("personscore_set"))
+    return(SafetyChecklist.objects.filter(personscore_set__name="Bob").prefetch_related("personscore_set"))
 
 def labinspection_details(pk) -> QuerySet[Labinspection]:
     

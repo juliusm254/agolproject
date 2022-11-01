@@ -65,13 +65,6 @@ services:
   #     - ./ops_front/nginx:/etc/nginx/conf.d
   #   ports:
   #     - 81:80
-  pgadmin:
-    image: dpage/pgadmin4
-    environment: 
-      - PGADMIN_DEFAULT_EMAIL=bassbassbuff@gmail.com
-      - PGADMIN_DEFAULT_PASSWORD=password
-    ports: 
-      - "5050:80"
 
   ops_front:
     container_name: ops_front_local
@@ -92,13 +85,3 @@ services:
       - ./ops_front/dist:/ops/build
     ports:
       - "81:80"
-
-  cust_front:
-    container_name: cust_front_local
-    restart: always
-    build:  
-      context: ./cust_front
-      dockerfile: Dockerfile-local
-    image: cust_front_image
-    ports:
-      - "82:80"

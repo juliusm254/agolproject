@@ -154,22 +154,22 @@ router.beforeEach(async (to, from, next) => {
   }
   let auth = store.getters["auth/isTokenActive"];
 
-  // if (!auth) {
-  //   const authData = store.getters["auth/getAuthData"];
-  //   if (authData.token) {
-  //     const payload = {
-  //       access: authData.token,
-  //       refresh: localStorage.getItem("refresh_token"),
-  //     };
-  //     console.log(payload);
-  //     const refreshResponse = await axios.post(
-  //       "api/token/refresh/",
-  //       payload
-  //     );
-  //     store.commit("auth/setRefreshToken", refreshResponse.data);
-  //     auth = true;
-  //   }
-  // }
+  if (!auth) {
+    const authData = store.getters["auth/getAuthData"];
+    if (authData.token) {
+      const payload = {
+        access: authData.token,
+        refresh: localStorage.getItem("refresh_token"),
+      };
+      console.log(payload);
+      const refreshResponse = await axios.post(
+        "api/token/refresh/",
+        payload
+      );
+      store.commit("auth/setRefreshToken", refreshResponse.data);
+      auth = true;
+    }
+  }
 
   if (to.fullPath == "/") {
     return next();

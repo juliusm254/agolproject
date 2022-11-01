@@ -27,7 +27,7 @@ def get_tokens_for_user(user):
 
 
 class LoginView(APIView):
-    permission_classes = (AllowAny,)
+    permission_classes = ()
 
     def post(self, request,):
         # type = request.POST['type']
@@ -76,6 +76,6 @@ class ScanOrder(generics.UpdateAPIView):
 
 class SafetyCheckListQuestionCreateAPIView(generics.ListCreateAPIView):    
     serializer_class = SafetyChecklistQuestionSerializer
-    queryset = SafetyChecklistQuestion.objects.filter(active=True).order_by("id")
+    queryset = SafetyChecklistQuestion.objects.all()
 
 
