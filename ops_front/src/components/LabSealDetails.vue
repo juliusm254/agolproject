@@ -1,7 +1,10 @@
 <script setup>
-import axios from 'axios'
+import axios from 'axios';
+import { useRouter, useRoute } from 'vue-router';
 import { onMounted, ref } from 'vue'
 import { useApi } from "../resources/composables/useApi";
+
+const router = useRouter()
 
 const { orderid, trailer, truck, labDetail, getTruck, getLabDetail } = useApi();
 
@@ -23,6 +26,14 @@ const submitForm = async (value) => {
       console.log(payload);
       await axios.post(`/lab-results-create/`, payload).then((response) => {
         console.log(response.data);
+        
+        router.push({
+        name: 'LabSeal',
+        // query: {
+        //   ...route.query,
+        // },
+      })
+        
       });
     };
 </script>

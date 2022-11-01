@@ -69,6 +69,9 @@ class ChecklistDetailAPI(APIView):
         trailer_details = OrderSerializer(source="order", read_only=True)
         truck_details = OrderSerializer(source="order", read_only=True)
         question_desc = SafetyChecklistQuestionSerializer(source="question", read_only=True)
+
+        # question_desc = get_safetychecklist_questions()
+        
         order_id = serializers.IntegerField()
         checklist_choice = serializers.CharField()
         
