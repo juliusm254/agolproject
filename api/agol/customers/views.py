@@ -295,11 +295,10 @@ class CustomerDriverViewSet(viewsets.ModelViewSet):
             queryset=Driver.objects.all())
         )
 
-        return CustomerDriver.objects.filter(customer_id=customer_id)
-
     def perform_create(self, request):
         national_id = self.request.data['national_id']
         obj = Driver.objects.filter(national_id=national_id).first()
+        print(obj)
         cust = Customer.objects.get(id=self.request.data['customer_id'])
         cust_driver = CustomerDriver(
             name = self.request.data['name'],

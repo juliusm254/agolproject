@@ -9,7 +9,7 @@
 
     <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
       <div class="bg-white py-8 px-6 shadow rounded-lg sm:px-10">
-        <form class="mb-0 space-y-6" @submit.prevent="submitForm">
+        <form class="mb-0 space-y-6" @submit.prevent="">
           
           <div>
             <label class="block text-sm font-medium text-gray-700" >Name</label>
