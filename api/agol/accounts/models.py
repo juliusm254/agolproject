@@ -9,7 +9,7 @@ from django.db import transaction
 from customers.models import Customer
 
 class UserManager(BaseUserManager):
-    def create_user(self, email, name, customer_id, password=None):
+    def create_user(self, email, name, type, customer_id, password=None):
         if not email:
             raise ValueError('Users must have an email address')
 
@@ -29,7 +29,7 @@ class UserManager(BaseUserManager):
 
         return user
 
-    def create_operatons_user(self, email, name, password=None):
+    def create_operations_user(self, email, name, type, password=None):
         user = self.create_user(email, name, password)
 
         user.type = 'OPERATIONS'
@@ -37,19 +37,19 @@ class UserManager(BaseUserManager):
 
         return user
 
-    def create_customer_user(self, email,customer_id, name, password=None):
-        user = self.create_user(email, name,customer_id, password)
+    def create_customer_user(self, email, name, type, customer_id, password=None):
+        user = self.create_user(email, name, type, customer_id, password)
 
-        user.type = 'CUSTOMER'
         user.save(using=self._db)
 
         return user
 
-    def create_superuser(self, email, name, password=None):
-        user = self.create_user(email, name, password)
-
+    def create_superuser(self, email, name, type, customer_id=None, password=None):
+        user = self.create_user(email, name, type, customer_id, password)
+        user.customer_id = None
         user.is_superuser = True
         user.is_staff = True
+        user.type = 'ADMIN'
 
         user.save(using=self._db)
 
@@ -72,8 +72,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     name = models.CharField(max_length=255)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
-    customer_id = models.ForeignKey(
-        Customer, on_delete=models.SET_NULL, blank=True, null=True)
+    customer_id = models.ForeignKey(Customer, on_delete=models.SET_NULL, blank=True, null=True)
     type = models.CharField(max_length=25, choices=TYPE)
 
     objects = UserManager()

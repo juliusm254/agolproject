@@ -20,16 +20,16 @@ class Customer(models.Model):
     date_created = models.DateTimeField(auto_now_add=True, null=True)
     bulk_customer = models.BooleanField(null=False, default=False)
 
-    def __str__(self):
-        return self.name
+    # def __str__(self):
+    #     return self.name
 
 
 class Vehicle(models.Model):
     registration = models.CharField(max_length=255)
     transporter = models.CharField(max_length=255)
     epra_no = models.CharField(max_length=255)
-    def __str__(self):
-        return self.registration
+    # def __str__(self):
+    #     return self.registration
 
 
 class Driver(models.Model):
@@ -37,8 +37,8 @@ class Driver(models.Model):
     national_id = models.CharField(max_length=255)
     epra_no = models.CharField(max_length=255)
 
-    def __str__(self):
-        return self.name
+    # def __str__(self):
+    #     return self.name
 
 
 class Order(models.Model):
@@ -91,8 +91,8 @@ class Product(models.Model):
     description = models.CharField(max_length=200, null=True, blank=True)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
 
-    def __str__(self):
-        return self.name
+    # def __str__(self):
+    #     return self.name
 
 
 class BulkOrder(models.Model):
@@ -107,8 +107,8 @@ class BulkOrder(models.Model):
     date_created = models.DateTimeField(auto_now_add=True, null=True)
     # created_by
     
-    def __str__(self):
-        return self.description
+    # def __str__(self):
+    #     return self.description
 
 
 class BulkOrderBalance(models.Model):

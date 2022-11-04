@@ -298,11 +298,10 @@ class CustomerDriverViewSet(viewsets.ModelViewSet):
     def perform_create(self, request):
         national_id = self.request.data['national_id']
         obj = Driver.objects.filter(national_id=national_id).first()
-        print(obj)
         cust = Customer.objects.get(id=self.request.data['customer_id'])
         cust_driver = CustomerDriver(
             name = self.request.data['name'],
-            customer_id = cust,
+            customer_id = cust.id,
             driver = obj
         )
         cust_driver.save(self)
