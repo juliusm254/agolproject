@@ -1,77 +1,59 @@
-<template>
-  <div class="container">
-    <div class="columns is-multiline">
-      <div class="column is-12">
-        <h1 class="title">Delete</h1>
-      </div>
+<script setup>
+import { onMounted } from 'vue'
+import { useApi } from "../resources/composables/useApi";
 
-      <div class="column is-12">
-        <form @submit.prevent="submitForm">
-          <div class="field">
-            <label>Truck</label>
-            <div class="control">
-              <!-- <select type="text" class="input" v-model="truck"> -->
-              <select v-model="truck">
-                <option disabled value="selected">Select Truck</option>
-                <option
-                  v-for="truck in trucks"
-                  v-bind:key="truck"
-                  :value="truck.truck"
-                >
-                  {{ truck.registration }}
-                </option>
-              </select>
-              <!-- <span style="padding-left:5%">Your Choice is: {{truck.registration}}</span> -->
-            </div>
-          </div>
+const { driverList,getDriverList } = useApi();
 
-          <div class="field">
-            <label>Trailer</label>
-            <div class="control">
-              <!-- <select type="text" class="input" v-model="truck"> -->
-              <select v-model="trailer">
-                <option disabled value="selected">Select Trailer</option>
-                <option
-                  v-for="trailer in trailers"
-                  v-bind:key="trailer"
-                  :value="trailer.trailer"
-                >
-                  {{ trailer.registration }}
-                </option>
-              </select>
-              <!-- <span style="padding-left:5%">Your Choice is: {{trailer}}</span> -->
-            </div>
-          </div>
+onMounted(() => {
+  //script
+  getDriverList()
+})
 
-          <div class="field">
-            <label>Driver</label>
-            <div class="control">
-              <!-- <select type="text" class="input" v-model="truck"> -->
-              <select v-model="driver">
-                <option disabled value="selected">Select Driver</option>
-                <option
-                  v-for="driver in drivers"
-                  v-bind:key="driver.id"
-                  :value="driver.driver"
-                >
-                  {{ driver.name }}
-                </option>
-              </select>
-              <!-- <span style="padding-left:5%">Your Choice is: {{driver.name}}</span> -->
-            </div>
-          </div>
+</script>
 
-          <div class="field">
-            <div class="control">
-              <button class="button is-success">Delete</button>
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
+
+
+
+<template>  
+  <div class="">
+    <h1 class="">Driver List</h1>
   </div>
+
+  <!-- Table -->
+  <div class="flex items-center justify-center">
+    <table class="border-collapse border-2 border-gray-500">
+      <thead>
+        <tr>
+          <th class="border border-gray-400 px-4 py-2 text-gray-800">Order No.</th>
+          <th class="border border-gray-400 px-4 py-2 text-gray-800">Truck</th>
+          <th class="border border-gray-400 px-4 py-2 text-gray-800">Transporter</th>
+          <th class="border border-gray-400 px-4 py-2 text-gray-800">Trailer</th>
+          <!-- <th class="border border-gray-400 px-4 py-2 text-gray-800">Order No.</th>
+          <th class="border border-gray-400 px-4 py-2 text-gray-800">Truck</th> -->
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="driver in driverList" v-bind:key="driver.id">
+          <td class="border border-gray-400 px-4 py-2">{{ driver.id }}</td>
+          <!-- <td class="border border-gray-400 px-4 py-2">{{ order.truck_details["registration"] }}</td>
+          <td class="border border-gray-400 px-4 py-2">{{ order.truck_details["transporter"]  }}</td>
+          <td class="border border-gray-400 px-4 py-2">{{ order.trailer_details["registration"] }}</td> -->
+          <td class="border border-gray-400 px-4 py-2">
+            <router-link
+                :to="`/`"
+                class="button is-light"
+                >Edit</router-link>
+            </td>
+          <!-- <td class="border border-gray-400 px-4 py-2">{{ order.id }}</td> -->
+        </tr>            
+      </tbody>
+    </table>
+  </div>
+  <!-- Table -->
 </template>
 
+
+<!-- 
 <script>
 import axios from "axios";
 
@@ -197,4 +179,4 @@ export default {
     },
   },
 };
-</script>
+</script> -->

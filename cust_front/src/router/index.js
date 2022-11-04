@@ -1,64 +1,64 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Home from "../views/Home.vue";
-import Login from "../views/Login.vue";
-import EditOrder from "../views/EditOrder.vue";
-import AddTruck from "../views/AddTruck.vue";
-import AddDriver from "../views/AddDriver.vue";
-import AddTrailer from "../views/AddTrailer.vue";
-import Drivers from "../views/Drivers.vue";
-import BulkBalance from "../views/BulkBalance.vue";
+import HomePage from "../views/HomePage.vue";
+import LogIn from "../views/LogIn.vue";
+import OrderEdit from "../views/OrderEdit.vue";
+import TruckAdd from "../views/TruckAdd.vue";
+import DriverAdd from "../views/DriverAdd.vue";
+import TraillerAdd from "../views/TraillerAdd.vue";
+import DriverList from "../views/DriverList.vue";
+import OrderBulk from "../views/OrderBulk.vue";
 import store from "../store";
 
 const routes = [
   {
     path: "/",
-    name: "Home",
-    component: Home,
+    name: "HomePage",
+    component: HomePage,
   },
   {
     path: "/login",
-    name: "Login",
-    component: Login,
+    name: "LogIn",
+    component: LogIn,
   },
   {
     path: "/add-driver",
-    name: "AddDriver",
-    component: AddDriver,
+    name: "DriverAdd",
+    component: DriverAdd,
   },
 
   {
     path: "/edit-order",
-    name: "EditOrder",
-    component: EditOrder,
+    name: "OrderEdit",
+    component: OrderEdit,
   },
   {
     path: "/add-truck",
-    name: "AddTruck",
-    component: AddTruck,
+    name: "TruckAdd",
+    component: TruckAdd,
   },
   {
     path: "/add-trailer",
-    name: "AddTrailer",
-    component: AddTrailer,
+    name: "TraillerAdd",
+    component: TraillerAdd,
   },
   {
     path: "/drivers",
-    name: "Drivers",
-    component: Drivers,
+    name: "DriverList",
+    component: DriverList,
   },
   {
     path: "/bulk-balance",
-    name: "BulkBalance",
-    component: BulkBalance,
+    name: "OrderBulk",
+    component: OrderBulk,
   },
   {
     path: "/orders",
-    name: "Orders",
+    name: "OrderList",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
-      import( "../views/Orders.vue"),
+      import( "../views/OrderList.vue"),
   },
 ];
 

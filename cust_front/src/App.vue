@@ -1,7 +1,7 @@
 <template>
 <NavBar    
   />
-  <div id="nav">
+  <!-- <div id="nav">
     | <router-link to="/">Home</router-link> |
     <router-link to="/orders">Orders</router-link> |
     <router-link to="/bulk-balance">Bulk</router-link> |
@@ -14,7 +14,7 @@
       <span>Account</span>
     </div>
     <Account v-if="showSidebar" :toggle="toggleSidebar" />
-  </div>
+  </div> -->
   <router-view />
 </template>
 

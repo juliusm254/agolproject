@@ -44,7 +44,7 @@
                   <button
                     class=" text-white text-lg hover:text-indigo-400 font-semibold rounded px-2 inline-flex items-center"
                   >
-                    <span class="mr-1">Lab</span>
+                    <span class="mr-1">Drivers</span>
                     <svg
                       class="fill-current h-4 w-4 mr-2"
                       xmlns="http://www.w3.org/2000/svg"
@@ -58,9 +58,9 @@
                   <ul class="absolute hidden rounded-t font-semibold drop-shadow-xl bg-white text-gray-700 pt-0 group-hover:block">
                     <li class="">
                       <router-link
-                        class="rounded-t  hover:bg-indigo-400 hover:text-white py-2 px-4 block whitespace-no-wrap"
-                        :to="`/lab-inspection`"
-                        >Inspection</router-link>
+                        class="rounded-t  hover:bg-indigo-400 hover:text-white py-2 px-4 block whitespace-pre"
+                        :to="`/add-driver`"
+                        >Add Driver</router-link>
                     </li>
                     <li class="">
                       <!-- <a
@@ -69,26 +69,26 @@
                         >Results</a
                       > -->
                       <router-link
-                      :to="`/lab-results`"
-                      class= "rounded-b hover:text-white hover:bg-indigo-400 py-2 px-4 block whitespace-no-wrap"
-                      >Results
+                      :to="`/drivers`"
+                      class= "rounded-b hover:text-white hover:bg-indigo-400 py-2 px-4 block whitespace-pre"
+                      >Driver List
                       </router-link>
                     </li>
                     <li class="">
                       <router-link
-                        class="rounded hover:text-white hover:bg-indigo-400 py-2 px-4 block whitespace-no-wrap"
+                        class="rounded hover:text-white hover:bg-indigo-400 py-2 px-4 block whitespace-pre"
                         :to="`/lab-seal`"
                         >Seal</router-link>
                     </li>
                     <li class="">
                       <router-link
-                        class="rounded hover:text-white hover:bg-indigo-400 py-2 px-4 block whitespace-no-wrap"
+                        class="rounded hover:text-white hover:bg-indigo-400 py-2 px-4 block whitespace-pre"
                         :to="`/lab-vent`"
                         >Vent</router-link>
                     </li>
                     <li class="">
                       <router-link
-                        class="rounded hover:text-white hover:bg-indigo-400 py-2 px-4 block whitespace-no-wrap"
+                        class="rounded hover:text-white hover:bg-indigo-400 py-2 px-4 block whitespace-pre"
                         :to="`/lab-seal`"
                         >Warning</router-link>
                     </li>
@@ -104,7 +104,7 @@
                   <button
                     class=" text-white text-lg hover:text-indigo-400 font-semibold rounded inline-flex items-center"
                   >
-                    <span class="mr-1">Safety</span>
+                    <span class="mr-1">Drivers</span>
                     <svg
                       class="fill-current h-4 w-4 ml-2"
                       xmlns="http://www.w3.org/2000/svg"
@@ -118,21 +118,21 @@
                   <ul class="absolute hidden drop-shadow-xl rounded-t font-semibold  bg-white text-gray-700 pt-0 group-hover:block">
                     <li class="">
                       <a
-                        class="rounded-t hover:bg-indigo-400 hover:text-white py-2 px-4 block whitespace-no-wrap"
+                        class="rounded-t hover:bg-indigo-400 hover:text-white py-2 px-4 block whitespace-pre"
                         href="/safety-inspection"
-                        >Inspection</a
+                        >Add Driver</a
                       >
                     </li>
                     <li class="">
                       <a
-                        class=" hover:bg-indigo-400 py-2 hover:text-white px-4 block whitespace-no-wrap"
+                        class=" hover:bg-indigo-400 py-2 hover:text-white px-4 block whitespace-pre"
                         href="/print-safety"
                         >Print</a
                       >
                     </li>
                     <li class="">
                       <a
-                        class="rounded-b  hover:bg-indigo-400 hover:text-white py-2 px-4 block whitespace-no-wrap"
+                        class="rounded-b  hover:bg-indigo-400 hover:text-white py-2 px-4 block whitespace-pre"
                         href="#"
                         >Warning</a
                       >
