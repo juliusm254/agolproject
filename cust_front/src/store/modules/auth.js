@@ -1,89 +1,185 @@
-import axios from "axios";
 import { SET_USER_TOKEN_DATA_MUTATION } from "./storeconstants";
+import axios from "axios";
+import login from '../../interceptors/login.js'
+import jwtInterceptor from '../../interceptors/jwt.js'
+import { jwtDecrypt, tokenAlive } from "../../shared/jwtHelper";
 
 const state = () => ({
-  loginState: "",
-  user_id: "",
-  customer_id: "",
-  refresh: "",
-  access: "",
-});
-
-const getters = {
-  getLoginState: (state) => state.loginState,
-};
+    authData: {
+      token: "",
+      tokenExp: "",
+      userId: "",
+      customer_id: "",  
+      refreshToken: "",
+    },
+    loginStatus: "",
+  });
+  
+  const getters = {
+    getLoginStatus(state) {
+      return state.loginStatus;
+    },
+    getAuthData(state) {
+      return state.authData;
+    },
+    isTokenActive(state) {
+      if (!state.authData.tokenExp) {
+        return false;
+      }
+      return tokenAlive(state.authData.tokenExp);
+    },
+  };
 
 const actions = {
-  async actionLogin(context, payload, config) {
-    const response = await axios
-
+  async actionLogin({ commit }, payload, config) {
+    const response = await login
       .post("/login/", payload, config, {
         withCredentials: true,
         credentials: "include",
       })
-
       .catch((err) => {
         console.log(err);
       });
 
     if (response && response.data) {
-      console.log(response.data);
+        console.log(response.data)
       localStorage.setItem("isAuthenticated", "true");
-      localStorage.setItem("access_token", response.data.access);
-      localStorage.setItem("customer_id", response.data.customer);
-      localStorage.setItem("refresh", response.data.refresh);
-      localStorage.setItem("user_id", response.data.user);
+    //   localStorage.setItem("access_token", response.data.access);
+    //   localStorage.setItem("customer_id", response.data.customer);
+    //   localStorage.setItem("refresh", response.data.refresh);
+    //   localStorage.setItem("user_id", response.data.user);
 
-      context.commit(SET_USER_TOKEN_DATA_MUTATION, {
-        user_id: response.data.user,
-        customer_id: response.data.customer,
-        refresh: response.data.refresh,
-        access: response.data.access,
+//       commit("setloginStatus", "success");
+//       commit("setaccessToken",response.data.access );
+//       commit("setaccessToken",response.data.access );
+//       user_id: response.data.user,
+// //         customer_id: response.data.customer,
+// //         refresh: response.data.refresh,
+// //         access: response.data.access,
+//     } else {
+//       commit("setloginStatus", "failed");
+//     }
+          commit("setUserToken", response.data);
+    
+          commit("setloginStatus", "success");
+        } else {
+          commit("setloginStatus", "failed");
+        }
+  },
+  actionUserToken({ commit },response ) {
+    console.log(response)
+    commit("setRefreshToken", response.data);
+
+  },
+
+  async userProfile({ commit }) {
+    const response = await jwtInterceptor
+      .get("http://localhost:3000/user-profile", {
+        withCredentials: true,
+        credentials: "include",
+      })
+      .catch((err) => {
+        console.log(err);
       });
 
-      context.commit("setLoginState", "success");
+    if (response && response.data) {
+      commit("setUserProfile", response.data);
+    }
+  },
+
+  async userLogout({ commit }) {
+    const response = await axios
+      .get("http://localhost:3000/logout", {
+        withCredentials: true,
+        credentials: "include",
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    if (response && response.data) {
+      commit("setLogout", true);
+      localStorage.removeItem("isAuthenticated");
     } else {
-      context.commit("setLoginState", "failed");
+      commit("setLogout", false);
     }
   },
 };
 
 const mutations = {
-  setLoginState(state, data) {
-    state.loginState = data;
-    state.access = localStorage.getItem("access_token");
+    setloginStatus(state, data) {
+    state.loginStatus = data;
+  },
+  setUserToken(state, data) {
+    console.log(data)
+
+    localStorage.setItem("access_token", data.access);
+    localStorage.setItem("refresh_token", data.refresh);
+    localStorage.setItem("userId", data.user);
+    localStorage.setItem("customer_id", data.customer);
+
+    const jwtDecodedValue = jwtDecrypt(data.access);
+    const newTokenData = {
+      token: data.access,
+      // refreshToken:localStorage.getItem("refresh_token"),
+      tokenExp: jwtDecodedValue.exp,
+      userId: jwtDecodedValue.user_id,
+      customer_id: jwtDecodedValue.customer_id,
+    };
+      console.log(newTokenData)
+    state.authData = newTokenData;
+  },
+  setRefreshToken (state, data) {
+    console.log(data)
+
+    localStorage.setItem("access_token", data.access);
+    localStorage.setItem("userId", data.user);
+    localStorage.setItem("customer_id", data.customer);
+
+    const jwtDecodedValue = jwtDecrypt(data.access);
+    const newTokenData = {
+      token: data.access,
+      // refreshToken:localStorage.getItem("refresh_token"),
+      tokenExp: jwtDecodedValue.exp,
+      userId: jwtDecodedValue.user_id,
+      customer_id: jwtDecodedValue.customer_id,
+    };
+      console.log(newTokenData)
+    state.authData = newTokenData;
   },
 
-  [SET_USER_TOKEN_DATA_MUTATION](state, payload) {
-    state.user_id = payload.user_id;
-    state.customer_id = payload.customer_id;
-    state.refresh = payload.refresh;
-    state.access = payload.access;
+  
+//   setRefreshToken (state, data) {
+//     const authData = {
+//         userId:data.user_id,
+//         customer_id:data.customer_id,
+//         refreshToken:data.refresh,
+//         token:data.access,
+//     }
+//     state.authData = authData;
+        
+//       },
+
+  setUserProfile(state, data) {
+    const userProfile = {
+      id: data.id,
+      lastName: data.lastName,
+      firstName: data.firstName,
+      email: data.email,
+      phone: data.phone,
+    };
+    state.userProfile = userProfile;
   },
-  initializeStore(state) {
-    if (localStorage.getItem("access_token")) {
-      state.access = localStorage.getItem("access_token");
-      state.customer_id = localStorage.getItem("customer_id");
-      state.user_id = localStorage.getItem("user_id");
-      state.refresh = localStorage.getItem("refresh");
-      state.loginState = true;
-    } else {
-      state.access = "";
-      state.loginState = false;
-    }
-  },
+
+  setLogout(state, payload) {
+    state.logOut = payload;
+  }
 };
-
-// };
 
 export default {
   namespaced: true,
-
   state,
-
   getters,
-
   actions,
-
   mutations,
 };

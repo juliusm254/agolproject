@@ -41,10 +41,10 @@ class CustomerTrailerSerializer(serializers.ModelSerializer):
 
 
 class CustomerDriverSerializer(serializers.ModelSerializer): 
-    national_id =  DriverSerializer(source="driver", read_only=True)
+    driver_details =  DriverSerializer(source="driver", read_only=True)
     class Meta:
         model = CustomerDriver
-        fields = ['name', 'driver', 'customer', 'national_id']
+        fields = ['name', 'id', 'customer', 'driver_details']
         # fields = '__all__'
 
 
@@ -69,7 +69,7 @@ class OrderSerializer(serializers.ModelSerializer):
                     'destination',
                     'order_quantity',
                     'order_status',
-                    'customer',
+                    # 'customer',
                     'customer_details'
                 ]
 

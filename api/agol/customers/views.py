@@ -32,6 +32,7 @@
 # from email.policy import default
 from django.db.models import Prefetch, Count, Q
 from django.contrib.auth import authenticate
+from django.shortcuts import get_object_or_404
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import viewsets, filters, status
 from rest_framework.views import APIView
@@ -113,8 +114,8 @@ class OrderViewSet(viewsets.ModelViewSet):
     
     def get_queryset(self):
         # customer_id = '3'
-        # # customer_id = self.request.user.customer_id.id
-        # queryset = Order.objects.filter(customer_id=customer_id).select_related('driver', 'truck', 'trailer', 'customer' )
+        customer_id = self.request.user.customer_id.id
+        queryset = Order.objects.filter(customer_id=customer_id).select_related('driver', 'truck', 'trailer', 'customer' )
         # # orders = []
 
         # # for order in queryset:
@@ -122,10 +123,12 @@ class OrderViewSet(viewsets.ModelViewSet):
         # #     orders.append({'id': order.id, 'driver': order.driver, })
 
         # # print(orders)     
-        # return queryset
-        pass
+        return queryset
+        # pass
 
     def perform_create(self, serializer):
+        print(self.request.data)
+
         truck = Vehicle.objects.filter(id=self.request.data['truck']).first()
         trailer = Vehicle.objects.filter(id=self.request.data['trailer']).first()
         driver = Driver.objects.filter(id=self.request.data['driver']).first()
@@ -289,7 +292,9 @@ class CustomerDriverViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         # customer_id = 2
+
         customer_id = self.request.user.customer_id.id
+        print(customer_id)
         return CustomerDriver.objects.filter(customer_id=customer_id).prefetch_related(
             Prefetch('driver',
             queryset=Driver.objects.all())
@@ -298,13 +303,22 @@ class CustomerDriverViewSet(viewsets.ModelViewSet):
     def perform_create(self, request):
         national_id = self.request.data['national_id']
         obj = Driver.objects.filter(national_id=national_id).first()
-        cust = Customer.objects.get(id=self.request.data['customer_id'])
+        cust = Customer.objects.get(id=self.request.user.customer_id.id)
         cust_driver = CustomerDriver(
             name = self.request.data['name'],
             customer_id = cust.id,
             driver = obj
         )
         cust_driver.save(self)
+
+    # def retrieve(self, request, pk=None):
+    #     # return CustomerDriver.objects.filter(customer_id=customer_id).prefetch_related(
+    #     #     Prefetch('driver',
+    #     #     )
+    #     # )
+    #     queryset=Driver.objects.all()
+
+    #     return (get_object_or_404(queryset, pk=pk))
 
 class VehicleViewSet(viewsets.ModelViewSet):
     permission_classes = ()

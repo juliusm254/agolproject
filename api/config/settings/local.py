@@ -26,7 +26,7 @@ ALLOWED_HOSTS = ["*"]
 #    "https://agol-bvtwuypbsq-km.a.run.app",
 
 # ]
-CORS_ALLOWED_ORIGINS = [ "http://localhost:82", "http://localhost:81","http://127.0.0.1:5173"]
+CORS_ALLOWED_ORIGINS = [ "http://localhost:82", "http://localhost:81","http://127.0.0.1:5173","http://127.0.0.1:5174" ]
 # CORS_ALLOWED_ORIGINS = [
 #     "http://0.0.0.0:8000",
 #     "http://172.18.0.2:8080",

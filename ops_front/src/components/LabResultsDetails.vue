@@ -58,7 +58,7 @@ const submitForm = async (value) => {
               <label class="block text-sm font-medium text-gray-700">Oxygen</label>
               <div class="mt-1">
                 <!-- <input id="password" name="password" type="password" autocomplete="current-password" required class="" /> -->
-                <input class="w-full form-control valid bg-gray-200 px-2 pt-2 rounded " readonly="" type="text" v-model="labResultsDetail.oxygen" />                
+                <input class="w-full form-control valid bg-gray-200 px-2 pt-2 rounded" readonly="" type="text" v-model="labResultsDetail.oxygen" />                
               </div>
             </div>
 

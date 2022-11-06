@@ -1,5 +1,5 @@
-<template>
-<NavBar    
+<!-- <template>
+<NavBar     -->
   />
   <!-- <div id="nav">
     | <router-link to="/">Home</router-link> |
@@ -15,9 +15,9 @@
     </div>
     <Account v-if="showSidebar" :toggle="toggleSidebar" />
   </div> -->
-  <router-view />
-</template>
-
+  <!-- <router-view />
+</template> -->
+<!-- 
 <script>
 // import { mapGetters } from 'vuex';
 // import axios from 'axios';
@@ -81,4 +81,33 @@ export default {
 #nav a.router-link-exact-active {
   color: #b9a13f;
 } */
+</style> -->
+
+<template>
+  <NavBar    
+  />
+  <router-view />
+
+ 
+</template>
+
+<script>
+
+import NavBar from './components/Navigation/NavBar.vue';
+
+export default {
+    name: 'App',
+    
+    components: {
+        NavBar,
+      
+    },
+
+    
+};
+</script>
+
+<style>
+
 </style>
+

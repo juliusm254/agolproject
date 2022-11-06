@@ -30,14 +30,12 @@
               <div class="flex items-center py-5 px-2">
               <router-link :to="`/orders`" class="text-white text-lg hover:text-indigo-400 font-semibold py-5 px-4 rounded inline-flex items-center">Orders</router-link>
                 <router-link :to="`/bulk-balance`" class="text-white text-lg hover:text-indigo-400 font-semibold py-5 px-4 rounded inline-flex items-center">Bulk Balance</router-link>
-                <router-link :to="`/add-driver`" class="text-white text-lg hover:text-indigo-400 font-semibold py-5 px-4 rounded inline-flex items-center">Add Driver</router-link>
-                <router-link :to="`/bulk-balance`" class="text-white text-lg hover:text-indigo-400 font-semibold py-5 px-4 rounded inline-flex items-center">Bulk Balance</router-link>
                 <!-- <a href="/orderscan" class="text-white text-lg hover:text-indigo-400 font-semibold py-5 px-4 rounded inline-flex items-center">Scan Order</a> -->
               </div>
               
               <!-- Menu Links -->
               
-              <!-- Lab Dropdown -->
+              <!-- Drivers Dropdown -->
 
               <div class="flex items-center py-5 px-2">
                 <div class="group inline-block relative">
@@ -62,51 +60,29 @@
                         :to="`/add-driver`"
                         >Add Driver</router-link>
                     </li>
-                    <li class="">
-                      <!-- <a
-                        class= "rounded-b hover:text-white hover:bg-indigo-400 py-2 px-4 block whitespace-no-wrap"
-                        href="/lab-results"
-                        >Results</a
-                      > -->
+                    <li class="">                      
                       <router-link
                       :to="`/drivers`"
                       class= "rounded-b hover:text-white hover:bg-indigo-400 py-2 px-4 block whitespace-pre"
                       >Driver List
                       </router-link>
                     </li>
-                    <li class="">
-                      <router-link
-                        class="rounded hover:text-white hover:bg-indigo-400 py-2 px-4 block whitespace-pre"
-                        :to="`/lab-seal`"
-                        >Seal</router-link>
-                    </li>
-                    <li class="">
-                      <router-link
-                        class="rounded hover:text-white hover:bg-indigo-400 py-2 px-4 block whitespace-pre"
-                        :to="`/lab-vent`"
-                        >Vent</router-link>
-                    </li>
-                    <li class="">
-                      <router-link
-                        class="rounded hover:text-white hover:bg-indigo-400 py-2 px-4 block whitespace-pre"
-                        :to="`/lab-seal`"
-                        >Warning</router-link>
-                    </li>
                   </ul>
                 </div>
               </div>
 
-              <!-- Lab Dropdown -->
+              <!-- Driver Dropdown -->
 
-              <!-- Safety Dropdown -->
+              <!-- Trucks Dropdown -->
+
               <div class="flex items-center py-5 px-2">
-                <div class="group inline-block relative ">
+                <div class="group inline-block relative">
                   <button
-                    class=" text-white text-lg hover:text-indigo-400 font-semibold rounded inline-flex items-center"
+                    class=" text-white text-lg hover:text-indigo-400 font-semibold rounded px-2 inline-flex items-center"
                   >
-                    <span class="mr-1">Drivers</span>
+                    <span class="mr-1">Trucks</span>
                     <svg
-                      class="fill-current h-4 w-4 ml-2"
+                      class="fill-current h-4 w-4 mr-2"
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 20 20"
                     >
@@ -115,33 +91,26 @@
                       />
                     </svg>
                   </button>
-                  <ul class="absolute hidden drop-shadow-xl rounded-t font-semibold  bg-white text-gray-700 pt-0 group-hover:block">
+                  <ul class="absolute hidden rounded-t font-semibold drop-shadow-xl bg-white text-gray-700 pt-0 group-hover:block">
                     <li class="">
-                      <a
-                        class="rounded-t hover:bg-indigo-400 hover:text-white py-2 px-4 block whitespace-pre"
-                        href="/safety-inspection"
-                        >Add Driver</a
-                      >
+                      <router-link
+                        class="rounded-t  hover:bg-indigo-400 hover:text-white py-2 px-4 block whitespace-pre"
+                        :to="`/add-truck`"
+                        >Add Truck</router-link>
                     </li>
-                    <li class="">
-                      <a
-                        class=" hover:bg-indigo-400 py-2 hover:text-white px-4 block whitespace-pre"
-                        href="/print-safety"
-                        >Print</a
-                      >
-                    </li>
-                    <li class="">
-                      <a
-                        class="rounded-b  hover:bg-indigo-400 hover:text-white py-2 px-4 block whitespace-pre"
-                        href="#"
-                        >Warning</a
-                      >
+                    <li class="">                      
+                      <router-link
+                      :to="`/drivers`"
+                      class= "rounded-b hover:text-white hover:bg-indigo-400 py-2 px-4 block whitespace-pre"
+                      >Truck List
+                      </router-link>
                     </li>
                   </ul>
                 </div>
               </div>
+
+              <!-- Driver Dropdown -->
               
-               <!-- Safety Dropdown -->
 
               <div class="flex items-center py-5 px-2">
                 <router-link :to="`/orders`" class="text-white text-lg hover:text-indigo-400 font-semibold py-5 px-4 rounded inline-flex items-center">Orders</router-link>
@@ -196,28 +165,3 @@ const dropdownOpenSafety = ref(false)
 const dropdownOpenLab = ref(false)
 
 </script>
-
-<style>
-/* @import url('https://rsms.me/inter/inter.css');
-html { font-family: 'Inter', sans-serif; }
-@supports (font-variation-settings: normal) {
-  html { font-family: 'Inter var', sans-serif; }
-}
-
-body {
-  background-color: #18181b;
-}
-
-.border-gray {
-  border-color: #27272a;
-}
-
-.dropdown-gray {
-  background-color: #27272A;
-}
-
-.hover\:dropdown-text-bg:hover {
-  background-color: #52525B;
-} */
-
-</style>

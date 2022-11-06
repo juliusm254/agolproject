@@ -1,20 +1,47 @@
 <script setup>
-import { onMounted } from 'vue'
 import { useApi } from "../resources/composables/useApi";
+import DriverDeleteModal from "./DriverDeleteModal.vue"
+import { onMounted, ref } from 'vue'
 
 const { driverList,getDriverList } = useApi();
 
+const isOpen = ref(false)
+const driver_name = ref("");
+const driver_epra = ref("");
+const driver_id_no = ref("");
+const driver_id = ref("");
+
+
 onMounted(() => {
-  //script
   getDriverList()
 })
+
+const openModal = (driver) => {
+      driver_id.value = driver.id;
+      driver_name.value = driver.name;
+      driver_epra.value = driver.driver_details.epra_no;
+      driver_id_no.value = driver.driver_details.national_id
+      isOpen.value = true;
+    };
+
+
 
 </script>
 
 
 
 
-<template>  
+<template>
+  <DriverDeleteModal 
+  class="absolute"  
+    :driver_id="driver_id"  
+    :driver_name="driver_name"
+    :driver_epra="driver_epra"
+    :driver_id_no="driver_id_no"    
+    :open="isOpen" 
+    @close="isOpen = !isOpen"
+    @closeDelete="getDriverList"
+    /> 
   <div class="">
     <h1 class="">Driver List</h1>
   </div>
@@ -24,26 +51,57 @@ onMounted(() => {
     <table class="border-collapse border-2 border-gray-500">
       <thead>
         <tr>
-          <th class="border border-gray-400 px-4 py-2 text-gray-800">Order No.</th>
-          <th class="border border-gray-400 px-4 py-2 text-gray-800">Truck</th>
-          <th class="border border-gray-400 px-4 py-2 text-gray-800">Transporter</th>
-          <th class="border border-gray-400 px-4 py-2 text-gray-800">Trailer</th>
+          <th class="border border-gray-400 px-4 py-2 text-gray-800">ID</th>
+          <th class="border border-gray-400 px-4 py-2 text-gray-800">Name</th>
+          <th class="border border-gray-400 px-4 py-2 text-gray-800">EPRA No.</th>
+          <th class="border border-gray-400 px-4 py-2 text-gray-800">ID No.</th>
+          <th class="border border-gray-400 px-4 py-2 text-gray-800"></th>
           <!-- <th class="border border-gray-400 px-4 py-2 text-gray-800">Order No.</th>
           <th class="border border-gray-400 px-4 py-2 text-gray-800">Truck</th> -->
         </tr>
       </thead>
       <tbody>
-        <tr v-for="driver in driverList" v-bind:key="driver.id">
+        <tr v-for="driver in driverList" v-bind:key="driver.driver">
           <td class="border border-gray-400 px-4 py-2">{{ driver.id }}</td>
-          <!-- <td class="border border-gray-400 px-4 py-2">{{ order.truck_details["registration"] }}</td>
-          <td class="border border-gray-400 px-4 py-2">{{ order.truck_details["transporter"]  }}</td>
-          <td class="border border-gray-400 px-4 py-2">{{ order.trailer_details["registration"] }}</td> -->
-          <td class="border border-gray-400 px-4 py-2">
-            <router-link
+          <td class="border border-gray-400 px-4 py-2">{{ driver.name }}</td>
+          <td class="border border-gray-400 px-4 py-2">{{ driver.driver_details.epra_no }}</td>
+          <td class="border border-gray-400 px-4 py-2">{{ driver.driver_details.national_id }}</td>
+          <!-- <td class="border border-gray-400 px-4 py-2"> -->
+            <!-- <button
+                @click="isOpen = true"
                 :to="`/`"
-                class="button is-light"
-                >Edit</router-link>
-            </td>
+                class="w-full flex 
+                    justify-center 
+                    py-2 px-4 border 
+                    border-transparent 
+                    shadow-sm 
+                    text-sm font-medium 
+                    text-white 
+                    bg-red-600 
+                    hover:bg-indigo-700   
+                    focus:outline-none 
+                    focus:ring-2 
+                    focus:ring-offset-2
+                    focus:ring-indigo-400"         
+                >Delete</button> -->
+                <button
+                @click="openModal(driver)"
+                :to="`/`"
+                class="w-full flex 
+                    justify-center 
+                    py-2 px-4 border 
+                    border-transparent 
+                    shadow-sm 
+                    text-sm font-medium 
+                    text-white 
+                    bg-red-600 
+                    hover:bg-indigo-700   
+                    focus:outline-none 
+                    focus:ring-2 
+                    focus:ring-offset-2
+                    focus:ring-indigo-400"         
+                >Delete</button>
+            <!-- </td> -->
           <!-- <td class="border border-gray-400 px-4 py-2">{{ order.id }}</td> -->
         </tr>            
       </tbody>
@@ -51,132 +109,3 @@ onMounted(() => {
   </div>
   <!-- Table -->
 </template>
-
-
-<!-- 
-<script>
-import axios from "axios";
-
-// import { toast } from 'bulma-toast'
-
-export default {
-  name: "Home",
-  data() {
-    return {
-      trucks: [],
-      trailers: [],
-      drivers: [],
-    };
-  },
-  mounted() {
-    this.getTrucks();
-    this.getDrivers();
-    this.getTrailers();
-  },
-
-  methods: {
-    async getTrucks() {
-      let config = {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("access_token"),
-          "Content-Type": "application/json",
-        },
-      };
-      // this.$store.commit('setIsLoading', true)
-      this.showNextButton = false;
-      this.showPreviousButton = false;
-
-      await axios
-        .get(`/customer-truck/`, config)
-        .then((response) => {
-          console.log(response.data);
-          this.trucks = response.data;
-          // this.num_orders = response.data.count
-        })
-
-        // await axios
-        //     .get(`/api/v1/leads/?page=${this.currentPage}&search=${this.query}`)
-        //     .then(response => {
-        //         this.leads = response.data.results
-        //         console.log(response.data)
-
-        //     // for (let i = 0; i < response.data.length; i++) {
-        //     //     this.leads.push(response.data[i])
-
-        //         if (response.data.next) {
-        //             this.showNextButton = true
-        //         }
-        //         if (response.data.previous) {
-        //             this.showPreviousButton = true
-        //         }
-        // })
-
-        .catch((error) => {
-          console.log(error);
-        });
-      // this.$store.commit('setIsLoading', false)
-    },
-    async getTrailers() {
-      let config = {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("access_token"),
-          "Content-Type": "application/json",
-        },
-      };
-      // this.$store.commit('setIsLoading', true)
-      this.showNextButton = false;
-      this.showPreviousButton = false;
-
-      await axios
-        .get(`/customer-trailer/`, config)
-        .then((response) => {
-          console.log(response.data);
-          this.trailers = response.data;
-          // this.num_orders = response.data.count
-        })
-
-        // await axios
-        //     .get(`/api/v1/leads/?page=${this.currentPage}&search=${this.query}`)
-        //     .then(response => {
-        //         this.leads = response.data.results
-        //         console.log(response.data)
-
-        //     // for (let i = 0; i < response.data.length; i++) {
-        //     //     this.leads.push(response.data[i])
-
-        //         if (response.data.next) {
-        //             this.showNextButton = true
-        //         }
-        //         if (response.data.previous) {
-        //             this.showPreviousButton = true
-        //         }
-        // })
-
-        .catch((error) => {
-          console.log(error);
-        });
-      // this.$store.commit('setIsLoading', false)
-    },
-
-    async getDrivers() {
-      // this.$store.commit('setIsLoading', true)
-      this.showNextButton = false;
-      this.showPreviousButton = false;
-      let config = {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("access_token"),
-          "Content-Type": "application/json",
-        },
-      };
-
-      await axios.get(`/customer-driver/`, config).then((response) => {
-        console.log(response.data);
-        this.drivers = response.data;
-        // this.num_orders = response.data.count
-      });
-
-      // this.$store.commit('setIsLoading', false)
-    },
-  },
-};
-</script> -->

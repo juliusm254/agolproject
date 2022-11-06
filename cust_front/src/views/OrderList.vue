@@ -1,8 +1,6 @@
 <template>
-  <div class="mx-auto container">
-    <div class="columns is-multiline">
-      <div class="column is-12">
-        <!-- <h1 class="title">Leads</h1>
+  <div class="flex items-center justify-center">
+       <!-- <h1 class="title">Leads</h1>
 
           <form @submit.prevent="getOrders">
             <div class="field has-addons">
@@ -18,24 +16,24 @@
         <div>
           <h1 class="title">Orders</h1>
 
-          <router-link :to="{ name: 'Home' }" class="button is-light mt-4"
+          <router-link :to="{ name: 'HomePage' }" class="button is-light mt-4"
             >Add Order</router-link
           >
         </div>
 
         <div>
-          <table>
+          <table class="border-collapse border-2 border-gray-500">
             <thead>
               <tr>
-                <th>Order No.</th>
-                <th>Destination</th>
-                <th>Driver</th>
-                <th>Order Qty</th>
-                <th>Trailer</th>
-                <th>Truck</th>
-                <th>Status</th>
-                <th>Created at</th>
-                <th></th>
+                <th class="border border-gray-400 px-4 py-2 text-gray-800">Order No.</th>
+                <th class="border border-gray-400 px-4 py-2 text-gray-800">Destination</th>
+                <th class="border border-gray-400 px-4 py-2 text-gray-800">Driver</th>
+                <th class="border border-gray-400 px-4 py-2 text-gray-800">Order Qty</th>
+                <th class="border border-gray-400 px-4 py-2 text-gray-800">Trailer</th>
+                <th class="border border-gray-400 px-4 py-2 text-gray-800">Truck</th>
+                <th class="border border-gray-400 px-4 py-2 text-gray-800"> Status</th>
+                <th class="border border-gray-400 px-4 py-2 text-gray-800">Created at</th>
+                <th class="border border-gray-400 px-4 py-2 text-gray-800"> </th>
               </tr>
             </thead>
 
@@ -43,14 +41,14 @@
 
             <tbody>
               <tr v-for="order in this.orders" :key="order.id">
-                <td>{{ order.id }}</td>
-                <td>{{ order.destination }}</td>
-                <td>{{ order.driver_details.name }}</td>
-                <td>{{ order.order_quantity }}</td>
-                <td>{{ order.trailer_details.registration }}</td>
-                <td>{{ order.truck_details.registration }}</td>
-                <td>{{ order.status }}</td>
-                <td>{{ new Date(order.created_at).toLocaleString()}} </td>
+                <td class="border border-gray-400 px-4 py-2">{{ order.id }}</td>
+                <td class="border border-gray-400 px-4 py-2">{{ order.destination }}</td>
+                <td class="border border-gray-400 px-4 py-2">{{ order.driver_details.name }}</td>
+                <td class="border border-gray-400 px-4 py-2">{{ order.order_quantity }}</td>
+                <td class="border border-gray-400 px-4 py-2">{{ order.trailer_details.registration }}</td>
+                <td class="border border-gray-400 px-4 py-2">{{ order.truck_details.registration }}</td>
+                <td class="border border-gray-400 px-4 py-2">{{ order.order_status }}</td>
+                <td class="border border-gray-400 px-4 py-2">{{ new Date(order.created_at).toLocaleString()}} </td>
               </tr>
             </tbody>
 
@@ -91,8 +89,6 @@
           </div> -->
         </div>
       </div>
-    </div>
-  </div>
 </template>
 
 <script>
