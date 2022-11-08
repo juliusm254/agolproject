@@ -181,9 +181,20 @@ class OrderViewSet(viewsets.ModelViewSet):
             '''New Code To be reviewed'''
 
             print('we got here')
-            balance_obj = BulkOrderBalance.objects.filter(customer_id=cust_obj.id)
-            # order_quantity = self.request.data['order_quantity']
-            balance_obj.update(quantity=F('quantity') - order_quantity)
+            # balance_obj = BulkOrderBalance.objects.filter(customer_id=cust_obj.id)
+            
+            # balance_obj.update(quantity=F('quantity') - order_quantity)
+
+            balance_obj = BulkOrderBalance.objects.get(customer_id=cust_obj.id)
+            print(balance_obj.quantity)
+
+            if balance_obj.quantity >= int(order_quantity):            
+                balance_obj.quantity = balance_obj.quantity - int(order_quantity)
+                print(balance_obj.quantity)
+                # product.name = 'Name changed again'
+                balance_obj.save(update_fields=['quantity'])
+
+            
 
 
 
