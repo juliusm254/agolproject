@@ -5,6 +5,7 @@ from customers.models import Customer, Order
 @admin.register(Customer)
 class RequestDemoAdmin(admin.ModelAdmin):
   list_display = ['id','name', 'email']
+  search_fields = ('name',)
 
 # Register your models here.
 @admin.register(Order)

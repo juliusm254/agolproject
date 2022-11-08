@@ -74,6 +74,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     customer_id = models.ForeignKey(Customer, on_delete=models.SET_NULL, blank=True, null=True)
     type = models.CharField(max_length=25, choices=TYPE)
+    date_joined = models.DateTimeField(auto_now_add=True)
 
     objects = UserManager()
 

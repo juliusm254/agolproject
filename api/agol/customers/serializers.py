@@ -72,6 +72,12 @@ class OrderSerializer(serializers.ModelSerializer):
                     # 'customer',
                     'customer_details'
                 ]
+        
+    
+    def validate_order_quantity(self, value):
+        if not value > 0:
+            raise serializers.ValidationError('Quantity too Low')
+        return value
 
                     
 class VehicleSerializer(serializers.ModelSerializer):

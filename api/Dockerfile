@@ -82,9 +82,9 @@ RUN pip install --no-cache-dir --no-index --find-links=/wheels/ /wheels/* \
   && rm -rf /wheels/
 
 
-# COPY --chown=django:django ./entrypoint /entrypoint
-# RUN sed -i 's/\r$//g' /entrypoint
-# RUN chmod +x /entrypoint
+COPY --chown=django:django ./entrypoint /entrypoint
+RUN sed -i 's/\r$//g' /entrypoint
+RUN chmod +x /entrypoint
 
 # COPY --chown=django:django ./nginx.conf /etc/nginx/conf.d/configfile.template
 
@@ -94,9 +94,9 @@ RUN pip install --no-cache-dir --no-index --find-links=/wheels/ /wheels/* \
 # RUN chown django: /var/log/nginx/error.log
 
 
-# COPY --chown=django:django ./start /start
-# RUN sed -i 's/\r$//g' /start
-# RUN chmod +x /start
+COPY --chown=django:django ./start /start
+RUN sed -i 's/\r$//g' /start
+RUN chmod +x /start
 
 #my shit for start script
 
@@ -126,7 +126,7 @@ USER django
 ENV PORT 8000
 CMD exec gunicorn --bind 0.0.0.0:$PORT --workers 1 --threads 8 --timeout 0 config.wsgi --chdir=/app
 
-# ENTRYPOINT ["/entrypoint"]
+ENTRYPOINT ["/entrypoint"]
 # ENV PORT 80
 
 # ENTRYPOINT ["/tini", "--"]

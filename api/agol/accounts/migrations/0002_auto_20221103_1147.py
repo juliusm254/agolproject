@@ -25,27 +25,6 @@ class Migration(migrations.Migration):
             managers=[
             ],
         ),
-        migrations.RemoveField(
-            model_name='user',
-            name='date_joined',
-        ),
-        migrations.RemoveField(
-            model_name='user',
-            name='first_name',
-        ),
-        migrations.RemoveField(
-            model_name='user',
-            name='last_name',
-        ),
-        migrations.RemoveField(
-            model_name='user',
-            name='username',
-        ),
-        migrations.AlterField(
-            model_name='user',
-            name='email',
-            field=models.EmailField(max_length=255, unique=True),
-        ),
         migrations.AlterField(
             model_name='user',
             name='is_active',
