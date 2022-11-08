@@ -139,7 +139,9 @@ class OrderViewSet(viewsets.ModelViewSet):
         # cust_obj = Customer.objects.get(id=1)
         print(cust_obj)
         destination = self.request.data['destination'],
-        order_quantity = self.request.data['order_quantity']
+        order_quantity = int(self.request.data['order_quantity'])
+        balance_obj = BulkOrderBalance.objects.get(customer_id=cust_obj.id)
+        print(balance_obj.quantity)
 
         if not cust_obj.bulk_customer:
         
@@ -185,14 +187,37 @@ class OrderViewSet(viewsets.ModelViewSet):
             
             # balance_obj.update(quantity=F('quantity') - order_quantity)
 
-            balance_obj = BulkOrderBalance.objects.get(customer_id=cust_obj.id)
-            print(balance_obj.quantity)
+            # try:
+            #     if balance_obj.quantity >= order_quantity:            
+            #         balance_obj.quantity = balance_obj.quantity - order_quantity
+            #         print(balance_obj.quantity)
+            #         # product.name = 'Name changed again'
+            #         balance_obj.save(update_fields=['quantity'])
 
-            if balance_obj.quantity >= int(order_quantity):            
-                balance_obj.quantity = balance_obj.quantity - int(order_quantity)
+            #     else:
+            #         raise Exception('No Stock')
+
+            # except:
+            #     print('except')
+
+            
+            # try:
+            if not balance_obj.quantity < order_quantity:            
+                balance_obj.quantity = balance_obj.quantity - order_quantity
                 print(balance_obj.quantity)
                 # product.name = 'Name changed again'
                 balance_obj.save(update_fields=['quantity'])
+                return
+
+            # else:
+            return Response(status=status.HTTP_403_FORBIDDEN)
+
+            # except AssertionError as error:
+            #     print(error)
+            #     return Response(status=status.HTTP_403_FORBIDDEN)
+                
+
+            
 
             
 
