@@ -9,7 +9,7 @@ from datetime import timedelta
 
 ROOT_DIR = Path(__file__).resolve(strict=True).parent.parent.parent
 # agol/
-APPS_DIR = ROOT_DIR / "agol"
+APPS_DIR = ROOT_DIR / "api"
 env = environ.Env()
 
 READ_DOT_ENV_FILE = env.bool("DJANGO_READ_DOT_ENV_FILE", default=False)
