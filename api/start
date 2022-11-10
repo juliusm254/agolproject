@@ -8,12 +8,11 @@ nginx -c "$PWD/nginx.conf" &
 
 # Apply database migrations
 echo "Apply database migrations"
-# python manage.py makemigrations &
-python merge_production_dotenvs_in_dotenv.py & 
+# # python manage.py makemigrations &
 
 # python manage.py migrate &
 # python /app/manage.py collectstatic --noinput &
-/usr/local/bin/gunicorn config.wsgi --bind 0.0.0.0:8000 --chdir=/app
+
 # wait -n
 
 #####################################################################################
