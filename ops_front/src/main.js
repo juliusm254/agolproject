@@ -18,8 +18,8 @@ import "./index.css";
 //   config.headers.common["Authorization"] = `bearer ${authData.token}`;
 // console.log(authData)
 
-// // axios.defaults.baseURL = "https://agol-bvtwuypbsq-km.a.run.app/operations/";
-axios.defaults.baseURL = "http://127.0.0.1:8000/operations";
+axios.defaults.baseURL = "https://agol-bvtwuypbsq-km.a.run.app/operations/";
+// axios.defaults.baseURL = "http://127.0.0.1:8000/operations";
 // axios.defaults.headers.common["Authorization"] = `bearer ${authData.token}`;
 
 let refresh = false;

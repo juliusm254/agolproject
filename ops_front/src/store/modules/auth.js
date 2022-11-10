@@ -35,7 +35,7 @@ const actions = {
     const response = await login
       .post("/login/", payload, config, {
         withCredentials: true,
-        credentials: "include",
+        // credentials: "include",
       })
       .catch((err) => {
         console.log(err);

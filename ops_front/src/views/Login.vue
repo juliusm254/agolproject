@@ -6,7 +6,8 @@
           <h1 class="h3 mb-3 font-weight-normal text-center">Please Sign In</h1>
 
           <p v-if="incorrectAuth">Incorrect Username</p>
-          <form v-on:submit.prevent="login">
+          <!-- <form v-on:submit.prevent="login"> -->
+          <form v-on:submit.prevent="submit">
             <div class="field">
               <label>Username</label>
               <div class="form-group">
@@ -44,6 +45,7 @@
 </template>
 
 <script>
+import { useRouter } from "vue-router";
 import { mapActions, mapGetters } from "vuex";
 
 export default {
@@ -71,28 +73,59 @@ export default {
 
     // ...mapActions(["actionLogin"]),
 
-    async login() {
-      console.log(this.username, this.password);
+    // async login() {
+    //   console.log(this.username, this.password);
 
+    //   let config = {
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //       "Access-Control-Allow-Origin": "https://agol-bvtwuypbsq-km.a.run.app/",
+    //     },
+    //   };
+
+    //   const payload = {
+    //     username: this.username,
+    //     password: this.password,
+    //     type: this.type,
+    //   };
+
+      
+    //   await this.actionLogin(payload, config,{
+    //       withCredentials: true
+    //     });
+    //   if (this.loginState == "success") {
+    //     this.$router.push({ name: "Home" });
+    //   } else {
+    //     this.incorrectAuth = true;
+    //   }
+    // },
+  },
+
+  setup() {
       let config = {
         headers: {
           "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "http://localhost:8000/",
+          "Access-Control-Allow-Origin": "https://agol-bvtwuypbsq-km.a.run.app/",
         },
       };
-
-      const payload = {
-        username: this.username,
-        password: this.password,
-        type: this.type,
-      };
-      await this.actionLogin(payload, config);
-      if (this.loginState == "success") {
-        this.$router.push({ name: "Home" });
-      } else {
-        this.incorrectAuth = true;
+      const router = useRouter();
+      const submit = async e => {
+        const form = new FormData(e.target);
+        const payload = Object.fromEntries(form.entries());
+        const {data} = await actionLogin(payload, config,{
+          withCredentials: true
+        });
+        axios.defaults.headers.common['Authorization'] = `Bearer ${data.access}`;
+        await router.push({ name: "Home" });
       }
-    },
-  },
+      return {
+        submit,
+        ...mapActions("auth", {
+      actionLogin: "actionLogin",
+    }),
+      }
+    }
+
+
 };
 </script>
