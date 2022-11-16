@@ -44,9 +44,12 @@ LOCALE_PATHS = [str(ROOT_DIR / "locale")]
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
 DATABASES = {"default": env.db("DATABASE_URL")}
+print('DATABASES')
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
 # https://docs.djangoproject.com/en/stable/ref/settings/#std:setting-DEFAULT_AUTO_FIELD
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+print('DATABASES')
 
 # URLS
 # ------------------------------------------------------------------------------
@@ -62,6 +65,7 @@ WSGI_APPLICATION = "config.wsgi.application"
 
 ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS')
 
+
 # ALLOWED_HOSTS = [
 #    "0.0.0.0:8000",
 #    "127.0.0.1",
@@ -73,6 +77,9 @@ ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS')
 # ]
 CORS_ALLOWED_ORIGINS = env.list('DJANGO_CORS_ALLOWED_ORIGINS')
 
+CORS_ALLOWED_ORIGIN_REGEXES = env('DJANGO_CORS_ALLOWED_ORIGIN_REGEXES')
+
+print(CORS_ALLOWED_ORIGINS)
 # CORS_ALLOWED_ORIGINS = [
 #     "http://0.0.0.0:8000",
 #     "http://172.18.0.2:8080",

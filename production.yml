@@ -16,7 +16,7 @@ services:
     #   # - postgres
     #   # - redis
     env_file:
-      - ./api/.envs/.production/.django
+      - ./api/.env
     # command: /start
     # expose:
     #   - "8000"
