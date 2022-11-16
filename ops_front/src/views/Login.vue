@@ -79,7 +79,8 @@ export default {
       let config = {
         headers: {
           "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "https://agol-bvtwuypbsq-km.a.run.app/",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Credentials": true
         },
       };
 
@@ -90,8 +91,7 @@ export default {
       };
 
       
-      await this.actionLogin(payload, config,{
-          withCredentials: true
+      await this.actionLogin(payload, config,{          
         });
       if (this.loginState == "success") {
         this.$router.push({ name: "Home" });

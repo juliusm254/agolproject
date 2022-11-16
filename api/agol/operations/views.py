@@ -31,7 +31,7 @@ class LoginView(APIView):
 
     def post(self, request,):
         # type = request.POST['type']
-        print(request.data['username'])
+        print(request.data)
         # if type == 'OPERATIONS':
         # username = request.data.get("username")
         # password = request.data.get("password")

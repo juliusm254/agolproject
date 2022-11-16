@@ -71,7 +71,7 @@ ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS')
 #    "https://agol-bvtwuypbsq-km.a.run.app",
 
 # ]
-CORS_ALLOWED_ORIGINS = env('DJANGO_CORS_ALLOWED_ORIGINS')
+CORS_ALLOWED_ORIGINS = env.list('DJANGO_CORS_ALLOWED_ORIGINS')
 
 # CORS_ALLOWED_ORIGINS = [
 #     "http://0.0.0.0:8000",

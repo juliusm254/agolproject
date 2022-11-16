@@ -33,10 +33,7 @@ const state = () => ({
 const actions = {
   async actionLogin({ commit }, payload, config) {
     const response = await login
-      .post("/login/", payload, config, {
-        withCredentials: true,
-        // credentials: "include",
-      })
+      .post("/login/", payload, config)
       .catch((err) => {
         console.log(err);
       });
