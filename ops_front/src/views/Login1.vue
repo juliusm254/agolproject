@@ -34,10 +34,12 @@
       const submit = async e => {
         const form = new FormData(e.target);
         const inputs = Object.fromEntries(form.entries());
-        const {data} = await axios.post('/login/', inputs, config, {
+        console.log(inputs)
+        const res = await axios.post('/login/', inputs, config, {
           withCredentials: true
         });
-        axios.defaults.headers.common['Authorization'] = `Bearer ${data.access}`;
+        console.log(res)
+        // axios.defaults.headers.common['Authorization'] = `Bearer ${data.access}`;
         await router.push('/');
       }
       return {

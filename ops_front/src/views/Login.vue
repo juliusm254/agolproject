@@ -73,59 +73,33 @@ export default {
 
     // ...mapActions(["actionLogin"]),
 
-    // async login() {
-    //   console.log(this.username, this.password);
+    async submit() {
+      console.log(this.username, this.password);
 
-    //   let config = {
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //       "Access-Control-Allow-Origin": "https://agol-bvtwuypbsq-km.a.run.app/",
-    //     },
-    //   };
-
-    //   const payload = {
-    //     username: this.username,
-    //     password: this.password,
-    //     type: this.type,
-    //   };
-
-      
-    //   await this.actionLogin(payload, config,{
-    //       withCredentials: true
-    //     });
-    //   if (this.loginState == "success") {
-    //     this.$router.push({ name: "Home" });
-    //   } else {
-    //     this.incorrectAuth = true;
-    //   }
-    // },
-  },
-
-  setup() {
       let config = {
         headers: {
           "Content-Type": "application/json",
           "Access-Control-Allow-Origin": "https://agol-bvtwuypbsq-km.a.run.app/",
         },
       };
-      const router = useRouter();
-      const submit = async e => {
-        const form = new FormData(e.target);
-        const payload = Object.fromEntries(form.entries());
-        const {data} = await actionLogin(payload, config,{
+
+      const payload = {
+        username: this.username,
+        password: this.password,
+        type: this.type,
+      };
+
+      
+      await this.actionLogin(payload, config,{
           withCredentials: true
         });
-        axios.defaults.headers.common['Authorization'] = `Bearer ${data.access}`;
-        await router.push({ name: "Home" });
+      if (this.loginState == "success") {
+        this.$router.push({ name: "Home" });
+      } else {
+        this.incorrectAuth = true;
       }
-      return {
-        submit,
-        ...mapActions("auth", {
-      actionLogin: "actionLogin",
-    }),
-      }
-    }
-
+    },
+  }, 
 
 };
 </script>

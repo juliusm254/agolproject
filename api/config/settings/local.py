@@ -11,7 +11,7 @@ SECRET_KEY = env(
     default="LdUVZ1N8S7JUdDwlS8BAEPcBYcrTUqy94wV9x6eOq8vXwQpD0uqMQgpy0ZEk6EAa",
 )
 # https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["127.0.0.1"]
 
 
 # CORS_ORIGIN_ALLOW_ALL = True

@@ -1,8 +1,17 @@
 # PostgreSQL
 # ------------------------------------------------------------------------------
-POSTGRES_HOST=postgres
-POSTGRES_PORT=5432
-POSTGRES_DB=agol
-POSTGRES_USER=VECeHzmaGdaxvLIiRFkVcszLXYrMiTVA
-POSTGRES_PASSWORD=dOdkeBNaVy3pTOM5i3YLTCcIaUVPk4odrAgltoTYj4WPN6C9ATtow5XSSyeyZ4fH
-DATABASE_URL="postgres://VECeHzmaGdaxvLIiRFkVcszLXYrMiTVA:dOdkeBNaVy3pTOM5i3YLTCcIaUVPk4odrAgltoTYj4WPN6C9ATtow5XSSyeyZ4fH@postgres:5432/agol"
+# POSTGRES_HOST=postgres
+# POSTGRES_PORT=5432
+# POSTGRES_DB=agol
+# POSTGRES_USER=VECeHzmaGdaxvLIiRFkVcszLXYrMiTVA
+# POSTGRES_PASSWORD=dOdkeBNaVy3pTOM5i3YLTCcIaUVPk4odrAgltoTYj4WPN6C9ATtow5XSSyeyZ4fH
+# DATABASE_URL="postgres://VECeHzmaGdaxvLIiRFkVcszLXYrMiTVA:dOdkeBNaVy3pTOM5i3YLTCcIaUVPk4odrAgltoTYj4WPN6C9ATtow5XSSyeyZ4fH@postgres:5432/agol"
+
+# PostgreSQL
+# ------------------------------------------------------------------------------
+POSTGRES_HOST=containers-us-west-115.railway.app
+POSTGRES_PORT=5565
+POSTGRES_DB=railway
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=csiVLLFw99bK26MCYAgF
+DATABASE_URL="postgresql://postgres:csiVLLFw99bK26MCYAgF@containers-us-west-115.railway.app:5565/railway"
