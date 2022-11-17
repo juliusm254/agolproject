@@ -28,8 +28,9 @@
               
               <!-- Menu Links -->
               <div class="flex items-center  py-5 px-2">
-                <a href="/" class="text-white text-lg hover:text-indigo-400 font-semibold py-5 px-4 rounded inline-flex items-center">Home</a>
-                <a href="/orderscan" class="text-white text-lg hover:text-indigo-400 font-semibold py-5 px-4 rounded inline-flex items-center">Scan Order</a>
+                <router-link :to="`/`" class="text-white text-lg hover:text-indigo-400 font-semibold py-5 px-4 rounded inline-flex items-center">Home</router-link>
+                
+                <router-link :to="`/orderscan`" class="text-white text-lg hover:text-indigo-400 font-semibold py-5 px-4 rounded inline-flex items-center">Scan Order</router-link>
               </div>
               <!-- Menu Links -->
               
@@ -112,26 +113,24 @@
                     </svg>
                   </button>
                   <ul class="absolute hidden drop-shadow-xl rounded-t font-semibold  bg-white text-gray-700 pt-0 group-hover:block">
+                                        
                     <li class="">
-                      <a
+                      <router-link :to="`/safety-inspection`"
                         class="rounded-t hover:bg-indigo-400 hover:text-white py-2 px-4 block whitespace-no-wrap"
-                        href="/safety-inspection"
-                        >Inspection</a
-                      >
+                        >Inspection</router-link>
                     </li>
                     <li class="">
-                      <a
+                      <router-link :to="`/print-safety`"
                         class=" hover:bg-indigo-400 py-2 hover:text-white px-4 block whitespace-no-wrap"
-                        href="/print-safety"
-                        >Print</a
-                      >
+                        >Print</router-link>
                     </li>
+
+                   
                     <li class="">
-                      <a
+                      <router-link :to="`/loading`"
                         class="rounded-b  hover:bg-indigo-400 hover:text-white py-2 px-4 block whitespace-no-wrap"
                         href="#"
-                        >Warning</a
-                      >
+                        >Warning</router-link>
                     </li>
                   </ul>
                 </div>
