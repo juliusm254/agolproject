@@ -1,41 +1,58 @@
 <template>
   <div>
     <div class="container text-dark">
-      <div class="row justify-content-md-center">
-        <div class="col-md-5 p-3 login justify-md-center">
+      <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+        <div class="bg-white py-8 px-6 shadow rounded-lg sm:px-10">
           <h1 class="h3 mb-3 font-weight-normal text-center">Please Sign In</h1>
 
           <p v-if="incorrectAuth">Incorrect Username</p>
           <!-- <form v-on:submit.prevent="login"> -->
-          <form v-on:submit.prevent="submit">
+          <form class="mb-0 space-y-6" v-on:submit.prevent="submit">
             <div class="field">
-              <label>Username</label>
-              <div class="form-group">
+              <label class="block text-sm font-medium text-gray-700">Username</label>
+              <div class="mt-1">
                 <input
                   type="text"
                   name="username"
                   id="user"
+                  required
                   v-model="username"
-                  class="input"
+                  class="w-full form-control valid border-2 bg-white px-2 p-1 rounded"
                 />
               </div>
             </div>
             <div class="field">
-              <label>Password</label>
-              <div class="form-group">
+              <label class="block text-sm font-medium text-gray-700">Password</label>
+              <div class="mt-1">
                 <input
                   type="password"
                   name="password"
                   id="pass"
                   v-model="password"
-                  class="input"
+                  required
+                  class="w-full form-control valid border-2 bg-white px-2 p-1 rounded"
                 />
               </div>
             </div>
-            <div class="field">
-              <div class="form-group">
-                <button type="submit" class="">Login</button>
-              </div>
+
+            <div>
+              <button                             
+                type="submit"                
+                class="w-full flex 
+                    justify-center 
+                    py-2 px-4 border 
+                    border-transparent 
+                    rounded-md shadow-sm 
+                    text-sm font-medium 
+                    text-white 
+                    bg-green-600 
+                    hover:bg-indigo-700 
+                    focus:outline-none 
+                    focus:ring-2 
+                    focus:ring-offset-2
+                    focus:ring-indigo-400"                
+                  >Submit
+                </button>              
             </div>
           </form>
         </div>
