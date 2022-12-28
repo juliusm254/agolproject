@@ -17,16 +17,42 @@ DB_ARGS=()
 function check_config() {
     param="$1"
     value="$2"
-    if grep -q -E "^\s*\b${param}\b\s*=" "$ODOO_RC" ; then       
-        value=$(grep -E "^\s*\b${param}\b\s*=" "$ODOO_RC" |cut -d " " -f3|sed 's/["\n\r]//g')
+    echo "param: $param"
+    echo "value: $value"
+
+    if grep -q -E "^\s*\b${param}\b\s*=" "$ODOO_RC" ; then
+        value=$(grep -E "^\s*\b${param}\b\s*=" "$ODOO_RC" |cut -d "=" -f2|sed 's/^\s*//;s/\s*$//;s/["\n\r]//g')
+       
+        # value=$(grep -E "^\s*\b${param}\b\s*=" "$ODOO_RC" |cut -d " " -f3|sed 's/["\n\r]//g')
     fi;
+
+    echo "grep output: $value"
+        echo "cut output: $value"
+        echo "sed output: $value"
     DB_ARGS+=("--${param}")
     DB_ARGS+=("${value}")
 }
+
+echo "HOST: $HOST"
+echo "PORT: $PORT"
+echo "USER: $USER"
+echo "PASSWORD: $PASSWORD"
+
+
 check_config "db_host" "$HOST"
 check_config "db_port" "$PORT"
 check_config "db_user" "$USER"
 check_config "db_password" "$PASSWORD"
+
+# specify the database and modules to install
+DATABASE="agol_db_1"
+MODULES="sale,purchase"
+
+# specify the directory containing the custom addon
+ADDON_DIR="/mnt/extra-addons/library_app"
+# run the odoo server with the -d, -i, and -i options
+odoo -d "$DATABASE" -i "$MODULES" -i "$ADDON_DIR" "${DB_ARGS[@]}"
+# odoo -d "$DATABASE" -i "$ADDON_DIR" "${DB_ARGS[@]}"
 
 case "$1" in
     -- | odoo)

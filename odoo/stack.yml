@@ -1,0 +1,75 @@
+version: '3.4'
+services:
+  web:
+    build:
+      context: ./project
+      dockerfile: Dockerfile
+    image: odoo:15.0
+    container_name: agol_local_odoo
+    depends_on:
+      - db
+    ports:
+      - "8099:8069"
+    # entrypoint:
+    #   - odoo
+    #   - -i
+    #   - base
+    #   - -d
+    #   - agol_db_1
+    volumes:
+      - odoo-web-data:/var/lib/odoo
+      - ./addons:/mnt/extra-addons
+      - ./odoo-data/config:/etc/odoo
+    networks:
+      - webnet
+
+  # agolapi:
+  #   build:
+  #     context: ./api
+  #     dockerfile: ./compose/local/django/Dockerfile
+  #   image: agol_local_django
+  #   container_name: agol_local_django
+  #   platform: linux/x86_64
+  #   # depends_on:
+  #   #   - postgres
+  #   volumes:
+  #     - ./api:/app:z
+  #   env_file:
+  #     - ./api/.envs/.local/.django
+  #     - ./api/.envs/.local/.postgres
+  #   ports:
+  #     - "8000:8000"
+  #   command: /start-local
+
+  db:
+    image: postgres:14
+    # ports:
+    #   - "6432:5432"
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_PASSWORD=odoo
+      - POSTGRES_USER=odoo
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    volumes:
+      - ./odoo-data/db_data_1:/var/lib/postgresql/data/pgdata
+    networks:
+      - webnet
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment: 
+      - PGADMIN_DEFAULT_EMAIL=bassbassbuff@gmail.com
+      - PGADMIN_DEFAULT_PASSWORD=password
+    ports: 
+      - "5050:80"
+    networks:
+      - webnet
+
+volumes:
+  odoo-web-data:
+  odoo-db-data_1:
+
+networks:
+  webnet:
+  
+

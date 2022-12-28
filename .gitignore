@@ -276,3 +276,5 @@ agol/media/
 # .env
 # .envs/*
 # !.envs/.local/
+
+venv15_3.9/*
