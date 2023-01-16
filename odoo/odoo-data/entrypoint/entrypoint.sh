@@ -5,7 +5,7 @@ set -e
 if [ -v PASSWORD_FILE ]; then
     PASSWORD="$(< $PASSWORD_FILE)"
 fi
-echo 'we here'
+echo 'we here ccd'
 # set the postgres database host, port, user and password according to the environment
 # and pass them as arguments to the odoo process if not present in the config file
 : ${HOST:=${DB_PORT_5432_TCP_ADDR:='db'}}
@@ -53,6 +53,7 @@ ADDON_DIR="/mnt/extra-addons/library_app"
 # run the odoo server with the -d, -i, and -i options
 # odoo -d "$DATABASE" -i "$MODULES" -i "$ADDON_DIR" "${DB_ARGS[@]}"
 # odoo -d "$DATABASE" -i "$ADDON_DIR" "${DB_ARGS[@]}"
+echo 'Before Script Done 2'
 odoo -c "/etc/odoo/odoo.conf" -u /"$ADDON_DIR"
 echo 'Script Done'
 case "$1" in

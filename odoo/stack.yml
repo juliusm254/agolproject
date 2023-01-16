@@ -4,7 +4,7 @@ services:
     build:
       context: ./project
       dockerfile: Dockerfile
-    image: odoo:15.0
+    # image: odoo:15.0
     container_name: agol_local_odoo
     depends_on:
       - db
@@ -51,7 +51,8 @@ services:
       - POSTGRES_USER=odoo
       - PGDATA=/var/lib/postgresql/data/pgdata
     volumes:
-      - ./odoo-data/db_data_1:/var/lib/postgresql/data/pgdata
+      # - ./odoo-data/db_data_1:/var/lib/postgresql/data/pgdata
+      - odoo-db-data:/var/lib/postgresql/data/pgdata
     networks:
       - webnet
 
@@ -67,7 +68,7 @@ services:
 
 volumes:
   odoo-web-data:
-  odoo-db-data_1:
+  odoo-db-data:
 
 networks:
   webnet:

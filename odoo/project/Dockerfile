@@ -19,7 +19,7 @@ COPY requirements.txt ./
 RUN pip3 install -r  requirements.txt
 
 # Copy entrypoint script and Odoo configuration file
-COPY ./entrypoint.sh /
+COPY ./entrypoint_update.sh /
 COPY ./config/odoo.conf /etc/odoo/
 
 # Set permissions and Mount /var/lib/odoo to allow restoring filestore and /mnt/extra-addons for users addons
@@ -49,5 +49,6 @@ USER odoo
 
 # WORKDIR /
 
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["/entrypoint_update.sh"]
+
 CMD ["odoo"]

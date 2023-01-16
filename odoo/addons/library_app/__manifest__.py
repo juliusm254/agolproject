@@ -34,14 +34,26 @@
 #     ],
 # }
 {
-			    "name": "Library Management",
-			    "summary": "Manage library catalog and book lending.",
-			    "author": "Dee Reis",
-			    "license": "AGPL-3",
-			    "website": "https://github.com/PacktPublishing"
-			               "/Odoo-15-Development-Essentials",
-			    "version": "15.0.1.0.0",
-			    "depends": ["base"],
-			    "application": True,
-				"category": "Services/Library",
-			}
+	"name": "Library Management",
+	"summary": "Manage library catalog and book lending.",
+	"author": "Dee Reis",
+	"license": "AGPL-3",
+	"website": "https://github.com/PacktPublishing"
+				"/Odoo-15-Development-Essentials",
+	"version": "15.0.1.0.0",
+	"depends": ["base"],
+	"application": True,
+	"category": "Services/Library",
+	
+	"data": [
+		"security/library_security.xml",
+		"security/ir.model.access.csv",
+		"views/book_view.xml",
+		"views/library_menu.xml",
+		"views/book_list_template.xml",
+	],
+	"demo": [
+        "demo/res.partner.csv",
+		"demo/library.book.csv",
+    ],
+}
